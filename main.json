@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-02-04 08:24:37.211084129 +0000 UTC m=+0.000154403"
+		"Date": "2022-02-05 09:48:10.281515155 +0000 UTC m=+0.000155702"
 	},
 	"Functions": [
 		{
@@ -1143,6 +1143,86 @@
 							"Name": "cookie"
 						}
 					],
+					"Returns": {
+						"Type": "Response"
+					}
+				},
+				{
+					"Name": "Response",
+					"Line": "func (res *Response) OK() *Response",
+					"Description": "Set status code as 200",
+					"Returns": {
+						"Type": "Response"
+					}
+				},
+				{
+					"Name": "Response",
+					"Line": "func (res *Response) MovedPermanently() *Response",
+					"Description": "Set status code as 301",
+					"Returns": {
+						"Type": "Response"
+					}
+				},
+				{
+					"Name": "Response",
+					"Line": "func (res *Response) TemporaryRedirect() *Response",
+					"Description": "Set status code as 307",
+					"Returns": {
+						"Type": "Response"
+					}
+				},
+				{
+					"Name": "Response",
+					"Line": "func (res *Response) BadRequest() *Response",
+					"Description": "Set status code as 400",
+					"Returns": {
+						"Type": "Response"
+					}
+				},
+				{
+					"Name": "Response",
+					"Line": "func (res *Response) Unauthorized() *Response",
+					"Description": "Set status code as 401",
+					"Returns": {
+						"Type": "Response"
+					}
+				},
+				{
+					"Name": "Response",
+					"Line": "func (res *Response) Forbidden() *Response",
+					"Description": "Set status code as 403",
+					"Returns": {
+						"Type": "Response"
+					}
+				},
+				{
+					"Name": "Response",
+					"Line": "func (res *Response) NotFound() *Response",
+					"Description": "Set status code as 404",
+					"Returns": {
+						"Type": "Response"
+					}
+				},
+				{
+					"Name": "Response",
+					"Line": "func (res *Response) InternalServerError() *Response",
+					"Description": "Set status code as 500",
+					"Returns": {
+						"Type": "Response"
+					}
+				},
+				{
+					"Name": "Response",
+					"Line": "func (res *Response) BadGateway() *Response",
+					"Description": "Set status code as 502",
+					"Returns": {
+						"Type": "Response"
+					}
+				},
+				{
+					"Name": "Response",
+					"Line": "func (res *Response) ServiceUnavailaible() *Response",
+					"Description": "Set status code as 503",
 					"Returns": {
 						"Type": "Response"
 					}
