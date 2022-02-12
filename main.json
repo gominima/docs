@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-02-10 05:12:50.643403896 +0000 UTC m=+0.000159503"
+		"Date": "2022-02-12 04:50:10.13789241 +0000 UTC m=+0.000128901"
 	},
 	"Functions": [
 		{
@@ -734,14 +734,6 @@
 					}
 				},
 				{
-					"Name": "Header",
-					"Line": "func (r *Request) Header() *IncomingHeader",
-					"Description": "Gets raw IncomingHeader instance",
-					"Returns": {
-						"Type": "IncomingHeader"
-					}
-				},
-				{
 					"Name": "Json",
 					"Line": "func (r *Request) Json() *json.Decoder",
 					"Description": "Gets raw json decoder instance",
@@ -790,17 +782,52 @@
 				},
 				{
 					"Name": "Cookie",
-					"Line": "func (r *Request) Cookie(name string) *http.Cookie",
-					"Description": "Get a paticular cookie by its name",
+					"Line": "func (r *Request) Cookie(key string) *http.Cookie",
+					"Description": "Get a paticular cookie by its key",
 					"Parameters": [
 						{
-							"Name": "name",
+							"Name": "key",
 							"Type": "string",
-							"Description": "name of the cookie"
+							"Description": "key of the cookie"
 						}
 					],
 					"Returns": {
 						"Type": "*http.Cookie"
+					}
+				},
+				{
+					"Name": "SetHeader",
+					"Line": "func (r *Request) SetHeader(key string, value string) *Request",
+					"Description": "Set a paticular Header",
+					"Parameters": [
+						{
+							"Name": "key",
+							"Type": "string",
+							"Description": "key of the Header"
+						},
+						{
+							"Name": "value",
+							"Type": "string",
+							"Description": "value of the Header"
+						}
+					],
+					"Returns": {
+						"Type": "*Request"
+					}
+				},
+				{
+					"Name": "GetHeader",
+					"Line": "func (r *Request) GetHeader(key string) string",
+					"Description": "Get a paticular Header by its key",
+					"Parameters": [
+						{
+							"Name": "key",
+							"Type": "string",
+							"Description": "key of the Header"
+						}
+					],
+					"Returns": {
+						"Type": "string"
 					}
 				}
 			],
@@ -875,21 +902,16 @@
 				{
 					"Name": "Get",
 					"Line": "func (h *OutgoingHeader) Get(key string) string",
-					"Description": "Sets new header to response",
+					"Description": "Gets the header from response headers",
 					"Parameters": [
 						{
 							"Name": "key",
 							"Type": "string",
-							"Description": "Key of the new header"
-						},
-						{
-							"Name": "value",
-							"Type": "string",
-							"Description": "Value of the new header"
+							"Description": "Key of the header"
 						}
 					],
 					"Returns": {
-						"Type": "OutgoingHeader"
+						"Type": "string"
 					}
 				},
 				{
@@ -946,8 +968,8 @@
 					}
 				},
 				{
-					"Name": "SetBaseHeaders",
-					"Line": "func (h *OutgoingHeader) SetBaseHeaders()",
+					"Name": "BaseHeaders",
+					"Line": "func (h *OutgoingHeader) BaseHeaders()",
 					"Description": "Sends good stack of base headers",
 					"Returns": {}
 				},
@@ -989,11 +1011,92 @@
 			"Description": "The response instance structure",
 			"Functions": [
 				{
-					"Name": "Header",
-					"Line": "func (res *Response) Header() *OutgoingHeader",
-					"Description": "Returns a outgoing header instance",
+					"Name": "GetHeader",
+					"Line": "func (res *Response) GetHeader(key string) string",
+					"Description": "Gets header from response",
+					"Parameters": [
+						{
+							"Name": "key",
+							"Type": "string",
+							"Description": "Key of the header"
+						}
+					],
 					"Returns": {
-						"Type": "OutgoingHeader"
+						"Type": "string"
+					}
+				},
+				{
+					"Name": "SetHeader",
+					"Line": "func (res *Response) SetHeader(key string, value string) *Response",
+					"Description": "Sets headers for response",
+					"Parameters": [
+						{
+							"Name": "key",
+							"Type": "string",
+							"Description": "Key of the header"
+						},
+						{
+							"Name": "value",
+							"Type": "string",
+							"Description": "Value of the header"
+						}
+					],
+					"Returns": {
+						"Type": "string"
+					}
+				},
+				{
+					"Name": "DelHeader",
+					"Line": "func (res *Response) DelHeader(key string) *Response",
+					"Description": "Gets header from response",
+					"Parameters": [
+						{
+							"Name": "key",
+							"Type": "string",
+							"Description": "Key of the header"
+						}
+					],
+					"Returns": {
+						"Type": "string"
+					}
+				},
+				{
+					"Name": "CloneHeaders",
+					"Line": "func (res *Response) CloneHeaders() http.Header",
+					"Description": "Clones all header from response",
+					"Returns": {
+						"Type": "http.Header"
+					}
+				},
+				{
+					"Name": "Setlength",
+					"Line": "func (res *Response) Setlength(len string) *Response",
+					"Description": "Sets length of the response body",
+					"Parameters": [
+						{
+							"Name": "len",
+							"Type": "string",
+							"Description": "length value of the header"
+						}
+					],
+					"Returns": {
+						"Type": "*Response"
+					}
+				},
+				{
+					"Name": "SetBaseHeaders",
+					"Line": "func (res *Response) SetBaseHeaders() *Response",
+					"Description": "Sets a good stack of base headers for response",
+					"Returns": {
+						"Type": "*Response"
+					}
+				},
+				{
+					"Name": "FlushHeaders",
+					"Line": "func (res *Response) FlushHeaders() *Response",
+					"Description": "Flushes headers to the response body",
+					"Returns": {
+						"Type": "*Response"
 					}
 				},
 				{
