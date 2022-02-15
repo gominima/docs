@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-02-14 18:06:00.632846053 +0000 UTC m=+0.000151599"
+		"Date": "2022-02-15 06:26:17.089464752 +0000 UTC m=+0.000128312"
 	},
 	"Functions": [
 		{
@@ -25,6 +25,49 @@
 			"Description": "Make a new default minima instance",
 			"Returns": {
 				"Type": "minima"
+			}
+		},
+		{
+			"Name": "NewRoutes",
+			"Line": "func NewRoutes() *Routes",
+			"Description": "Makes a new Routes instance",
+			"Returns": {
+				"Type": "*Routes"
+			}
+		},
+		{
+			"Name": "matchRoutes",
+			"Line": "func matchRoutes(path string, routes []Route) (Handler, map[string]string, bool)",
+			"Description": "Matches routes to the request",
+			"Parameters": [
+				{
+					"Name": "path",
+					"Type": "string",
+					"Description": "Path of the request route to find"
+				},
+				{
+					"Name": "routes",
+					"Type": "[]Route",
+					"Description": "The array of routes to match"
+				}
+			],
+			"Returns": {
+				"Type": "Handler, map[string]string, bool"
+			}
+		},
+		{
+			"Name": "cleanArray",
+			"Line": "func cleanArray(a []string) []string",
+			"Description": "Cleans the array and finds non nill values",
+			"Parameters": [
+				{
+					"Name": "path",
+					"Type": "string",
+					"Description": "The array of string to slice and clean"
+				}
+			],
+			"Returns": {
+				"Type": "[]string"
 			}
 		},
 		{
@@ -91,19 +134,6 @@
 			"Name": "NewRouter",
 			"Line": "func NewRouter() *Router",
 			"Description": "Make new default router interface",
-			"Returns": {}
-		},
-		{
-			"Name": "RegexPath",
-			"Line": "func RegexPath(path string) (string, []string)",
-			"Description": "Compiles path to regex",
-			"Parameters": [
-				{
-					"Name": "path",
-					"Type": "string",
-					"Description": "The route path"
-				}
-			],
 			"Returns": {}
 		}
 	],
@@ -250,7 +280,7 @@
 				},
 				{
 					"Name": "Get",
-					"Line": "func (m *minima) Get(path string, handler ...Handler) *minima",
+					"Line": "func (m *minima) Get(path string, handler Handler) *minima",
 					"Description": "Adds route with Get method",
 					"Parameters": [
 						{
@@ -270,7 +300,7 @@
 				},
 				{
 					"Name": "Put",
-					"Line": "func (m *minima) Put(path string, handler ...Handler) *minima",
+					"Line": "func (m *minima) Put(path string, handler Handler) *minima",
 					"Description": "Adds route with Put method",
 					"Parameters": [
 						{
@@ -290,7 +320,7 @@
 				},
 				{
 					"Name": "Options",
-					"Line": "func (m *minima) Options(path string, handler ...Handler) *minima",
+					"Line": "func (m *minima) Options(path string, handler Handler) *minima",
 					"Description": "Adds route with Options method",
 					"Parameters": [
 						{
@@ -310,7 +340,7 @@
 				},
 				{
 					"Name": "Head",
-					"Line": "func (m *minima) Head(path string, handler ...Handler) *minima",
+					"Line": "func (m *minima) Head(path string, handler Handler) *minima",
 					"Description": "Adds route with Head method",
 					"Parameters": [
 						{
@@ -330,7 +360,7 @@
 				},
 				{
 					"Name": "Delete",
-					"Line": "func (m *minima) Delete(path string, handler ...Handler) *minima",
+					"Line": "func (m *minima) Delete(path string, handler Handler) *minima",
 					"Description": "Adds route with Delete method",
 					"Parameters": [
 						{
@@ -350,7 +380,7 @@
 				},
 				{
 					"Name": "Patch",
-					"Line": "func (m *minima) Patch(path string, handler ...Handler) *minima",
+					"Line": "func (m *minima) Patch(path string, handler Handler) *minima",
 					"Description": "Adds route with Patch method",
 					"Parameters": [
 						{
@@ -370,7 +400,7 @@
 				},
 				{
 					"Name": "Post",
-					"Line": "func (m *minima) Post(path string, handler ...Handler) *minima",
+					"Line": "func (m *minima) Post(path string, handler Handler) *minima",
 					"Description": "Adds route with Post method",
 					"Parameters": [
 						{
@@ -396,7 +426,7 @@
 						{
 							"Name": "handler",
 							"Type": "Handler",
-							"Description": "Minima handler instance or net/http handler instance"
+							"Description": "Minima handler instance"
 						}
 					],
 					"Returns": {
@@ -412,6 +442,21 @@
 							"Name": "handler",
 							"Type": "rawHandle",
 							"Description": "net/http handler instance"
+						}
+					],
+					"Returns": {
+						"Type": "*minima"
+					}
+				},
+				{
+					"Name": "NotFound",
+					"Line": "func (m *minima) NotFound(handler Handler) *minima",
+					"Description": "Injects the NotFound handler to the minima instance",
+					"Parameters": [
+						{
+							"Name": "handler",
+							"Type": "Handler",
+							"Description": "Minima handler instance"
 						}
 					],
 					"Returns": {
@@ -574,46 +619,88 @@
 			]
 		},
 		{
-			"Name": "mux",
-			"Line": "type mux struct",
-			"Description": "The mux structure",
+			"Name": "param",
+			"Line": "type param struct",
+			"Description": "The Param structure",
+			"Properties": [
+				{
+					"Name": "name",
+					"Type": "string",
+					"Description": "The name of the param"
+				},
+				{
+					"Name": "fixed",
+					"Type": "bool",
+					"Description": "Whether the param is fixed or not"
+				}
+			]
+		},
+		{
+			"Name": "Route",
+			"Line": "type Route struct",
+			"Description": "The Route structure",
+			"Properties": [
+				{
+					"Name": "prefix",
+					"Type": "string",
+					"Description": "The prefix of the route"
+				},
+				{
+					"Name": "partnames",
+					"Type": "[]param",
+					"Description": "The route paths split into parts"
+				},
+				{
+					"Name": "function",
+					"Type": "Handler",
+					"Description": "The handler to be used"
+				}
+			]
+		},
+		{
+			"Name": "Routes",
+			"Line": "type Routes struct",
+			"Description": "The Routes root structure",
 			"Functions": [
 				{
-					"Name": "matchingPath",
-					"Line": "func (m *mux) matchingPath(path string) (bool, map[string]string)",
-					"Description": "Match a path",
+					"Name": "Add",
+					"Line": "func (r *Routes) Add(p string, f Handler)",
+					"Description": "Adds a new route to the routes table",
 					"Parameters": [
 						{
 							"Name": "path",
 							"Type": "string",
-							"Description": "The path to match"
+							"Description": "Path of the route"
+						},
+						{
+							"Name": "handler",
+							"Type": "Handler",
+							"Description": "Handler of the route"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Name": "Get",
+					"Line": "func (r *Routes) Get(path string) (Handler, map[string]string, bool)",
+					"Description": "Gets handler and params from the routes table",
+					"Parameters": [
+						{
+							"Name": "path",
+							"Type": "string",
+							"Description": "Path of the route to find"
 						}
 					],
 					"Returns": {
-						"Type": "bool, map[]string[]string"
+						"Type": "Handler, map[string]string, bool"
 					}
 				}
 			],
 			"Properties": [
 				{
-					"Name": "Path",
-					"Type": "string",
-					"Description": "The path to match"
-				},
-				{
-					"Name": "Params",
-					"Type": "[]string",
-					"Description": "The params to use"
-				},
-				{
-					"Name": "Regex",
-					"Type": "regexp.Regexp",
-					"Description": "The regex to use"
-				},
-				{
-					"Name": "Handlers",
-					"Type": "[]Handler",
-					"Description": "The handlers to use"
+					"Name": "roots",
+					"Type": "map[string][]Route",
+					"Description": "The map of array routes"
 				}
 			]
 		},
@@ -657,28 +744,6 @@
 					"Name": "headers",
 					"Type": "[]*ReqHeader",
 					"Description": "Array of request headers"
-				}
-			]
-		},
-		{
-			"Name": "Param",
-			"Line": "type Param struct",
-			"Description": "The request param structure",
-			"Properties": [
-				{
-					"Name": "Path",
-					"Type": "string",
-					"Description": "Route path of the param"
-				},
-				{
-					"Name": "key",
-					"Type": "string",
-					"Description": "Key for the param"
-				},
-				{
-					"Name": "value",
-					"Type": "string",
-					"Description": "Value of the param"
 				}
 			]
 		},
@@ -1384,7 +1449,7 @@
 			"Functions": [
 				{
 					"Name": "Register",
-					"Line": "func (r *Router) Register(method string, path string, handlers ...Handler) *mux",
+					"Line": "func (r *Router) Register(method string, path string, handler Handler) error",
 					"Description": "Registers a new route to router interface",
 					"Parameters": [
 						{
@@ -1397,7 +1462,7 @@
 				},
 				{
 					"Name": "Get",
-					"Line": "func (r *Router) Get(path string, handlers ...Handler) *Router",
+					"Line": "func (r *Router) Get(path string, handler Handler) *Router",
 					"Description": "Adds route with Get method",
 					"Parameters": [
 						{
@@ -1417,7 +1482,7 @@
 				},
 				{
 					"Name": "Post",
-					"Line": "func (r *Router) Post(path string, handlers ...Handler) *Router",
+					"Line": "func (r *Router) Post(path string, handler Handler) *Router",
 					"Description": "Adds route with Post method",
 					"Parameters": [
 						{
@@ -1437,7 +1502,7 @@
 				},
 				{
 					"Name": "Put",
-					"Line": "func (r *Router) Put(path string, handlers ...Handler) *Router",
+					"Line": "func (r *Router) Put(path string, handler Handler) *Router",
 					"Description": "Adds route with Put method",
 					"Parameters": [
 						{
@@ -1457,7 +1522,7 @@
 				},
 				{
 					"Name": "Patch",
-					"Line": "func (r *Router) Patch(path string, handlers ...Handler)",
+					"Line": "func (r *Router) Patch(path string, handler Handler)",
 					"Description": "Adds route with Patch method",
 					"Parameters": [
 						{
@@ -1477,7 +1542,7 @@
 				},
 				{
 					"Name": "Options",
-					"Line": "func (r *Router) Options(path string, handlers ...Handler) *Router",
+					"Line": "func (r *Router) Options(path string, handler Handler) *Router",
 					"Description": "Adds route with Options method",
 					"Parameters": [
 						{
@@ -1497,7 +1562,7 @@
 				},
 				{
 					"Name": "Head",
-					"Line": "func (r *Router) Head(path string, handlers ...Handler) *Router",
+					"Line": "func (r *Router) Head(path string, handler Handler) *Router",
 					"Description": "Adds route with Head method",
 					"Parameters": [
 						{
@@ -1517,7 +1582,7 @@
 				},
 				{
 					"Name": "Delete",
-					"Line": "func (r *Router) Delete(path string, handlers ...Handler) *Router",
+					"Line": "func (r *Router) Delete(path string, handler Handler) *Router",
 					"Description": "Adds route with Delete method",
 					"Parameters": [
 						{
@@ -1537,7 +1602,7 @@
 				},
 				{
 					"Name": "GetRouterRoutes",
-					"Line": "func (r *Router) GetRouterRoutes() map[string][]*mux",
+					"Line": "func (r *Router) GetRouterRoutes() map[string]*Routes",
 					"Description": "Returns all the routes in router",
 					"Returns": {
 						"Type": "map[string][]*mux"
@@ -1560,30 +1625,35 @@
 				},
 				{
 					"Name": "Mount",
-					"Line": "func (r *Router) Mount(basepath string, Router *Router) *Router",
-					"Description": "Mounts all routes to a specific path",
+					"Line": "func (r *Router) Mount(path string, Router *Router) *Router",
+					"Description": "Mounts router to a specific path",
 					"Parameters": [
 						{
-							"Name": "basepath",
+							"Name": "path",
 							"Type": "string",
-							"Description": "The prefix route path"
+							"Description": "The route path"
 						},
 						{
-							"Name": "Router",
-							"Type": "Router",
-							"Description": "The router instance to append"
+							"Name": "router",
+							"Type": "*Router",
+							"Description": "Minima router instance"
 						}
 					],
 					"Returns": {
-						"Type": "Router"
+						"Type": "*Router"
 					}
 				}
 			],
 			"Properties": [
 				{
-					"Name": "route",
-					"Type": "map[string][]*mux",
+					"Name": "routes",
+					"Type": "map[string][]*Routes",
 					"Description": "The mux routes"
+				},
+				{
+					"Name": "notfound",
+					"Type": "Handler",
+					"Description": "The handler for the non matching routes"
 				}
 			]
 		}
