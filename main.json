@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-02-15 06:26:17.089464752 +0000 UTC m=+0.000128312"
+		"Date": "2022-02-16 01:13:28.171894695 +0000 UTC m=+0.000121803"
 	},
 	"Functions": [
 		{
@@ -169,16 +169,6 @@
 					"Name": "handler",
 					"Type": "Handler",
 					"Description": "The handler to be used"
-				},
-				{
-					"Name": "israw",
-					"Type": "bool",
-					"Description": "Whether the handler is raw net/http or not"
-				},
-				{
-					"Name": "rawHandler",
-					"Type": "rawHandle",
-					"Description": "The raw handler to be used"
 				}
 			]
 		},
@@ -196,19 +186,6 @@
 							"Name": "handler",
 							"Type": "Handler",
 							"Description": "The handler to add"
-						}
-					],
-					"Returns": {}
-				},
-				{
-					"Name": "AddRawPlugin",
-					"Line": "func (p *Plugins) AddRawPlugin(handler rawHandle)",
-					"Description": "Add a raw net/http plugin",
-					"Parameters": [
-						{
-							"Name": "handler",
-							"Type": "rawHandle",
-							"Description": "The raw handler to add"
 						}
 					],
 					"Returns": {}
@@ -427,21 +404,6 @@
 							"Name": "handler",
 							"Type": "Handler",
 							"Description": "Minima handler instance"
-						}
-					],
-					"Returns": {
-						"Type": "*minima"
-					}
-				},
-				{
-					"Name": "UseRaw",
-					"Line": "func (m *minima) UseRaw(handler rawHandle) *minima",
-					"Description": "Injects the raw net/http handler to middleware stack",
-					"Parameters": [
-						{
-							"Name": "handler",
-							"Type": "rawHandle",
-							"Description": "net/http handler instance"
 						}
 					],
 					"Returns": {
