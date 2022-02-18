@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-02-16 01:13:28.171894695 +0000 UTC m=+0.000121803"
+		"Date": "2022-02-18 02:11:37.315702886 +0000 UTC m=+0.000128501"
 	},
 	"Functions": [
 		{
@@ -12,12 +12,6 @@
 			"Returns": {
 				"Type": "Config"
 			}
-		},
-		{
-			"Name": "use",
-			"Line": "func use() *Plugins",
-			"Description": "Initialise the plugins interface",
-			"Returns": {}
 		},
 		{
 			"Name": "New",
@@ -146,74 +140,17 @@
 				{
 					"Name": "Middleware",
 					"Type": "[]Handler",
-					"Description": "The plugins to be used"
+					"Description": "The minima middlewares to be used"
 				},
 				{
-					"Name": "bool",
-					"Type": "Logger",
-					"Description": "Whether logger is enabled or not"
+					"Name": "HttpHandler",
+					"Type": "[]http.HandlerFunc",
+					"Description": "The net/http middlewares to be used"
 				},
 				{
 					"Name": "router",
 					"Type": "Router",
 					"Description": "The router instance to be used"
-				}
-			]
-		},
-		{
-			"Name": "Middleware",
-			"Line": "type Middleware struct",
-			"Description": "The Middleware structure",
-			"Properties": [
-				{
-					"Name": "handler",
-					"Type": "Handler",
-					"Description": "The handler to be used"
-				}
-			]
-		},
-		{
-			"Name": "Plugins",
-			"Line": "type Plugins struct",
-			"Description": "The Plugins structure",
-			"Functions": [
-				{
-					"Name": "AddPlugin",
-					"Line": "func (p *Plugins) AddPlugin(handler Handler)",
-					"Description": "Add a plugin",
-					"Parameters": [
-						{
-							"Name": "handler",
-							"Type": "Handler",
-							"Description": "The handler to add"
-						}
-					],
-					"Returns": {}
-				},
-				{
-					"Name": "ServePlugin",
-					"Line": "func (p *Plugins) ServePlugin(res *Response, req *Request)",
-					"Description": "Serve a plugin",
-					"Parameters": [
-						{
-							"Name": "res",
-							"Type": "Response",
-							"Description": "The response"
-						},
-						{
-							"Name": "req",
-							"Type": "Request",
-							"Description": "The request"
-						}
-					],
-					"Returns": {}
-				}
-			],
-			"Properties": [
-				{
-					"Name": "plugin",
-					"Type": "Middleware",
-					"Description": "The plugin"
 				}
 			]
 		},
@@ -399,16 +336,7 @@
 					"Name": "Use",
 					"Line": "func (m *minima) Use(handler Handler) *minima",
 					"Description": "Injects the given handler to middleware stack",
-					"Parameters": [
-						{
-							"Name": "handler",
-							"Type": "Handler",
-							"Description": "Minima handler instance"
-						}
-					],
-					"Returns": {
-						"Type": "*minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "NotFound",
@@ -540,6 +468,50 @@
 						"Type": "interface{",
 						"Description": "}"
 					}
+				},
+				{
+					"Name": "Use",
+					"Line": "func (m *minima) Use(handler ...Handler)",
+					"Description": "Injects minima middleware to the stack",
+					"Parameters": [
+						{
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler stack to append"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Name": "UseRaw",
+					"Line": "func (m *minima) UseRaw(handler ...http.HandlerFunc)",
+					"Description": "Injects net/http middleware to the stack",
+					"Parameters": [
+						{
+							"Name": "handler",
+							"Type": "...http.HandlerFunc",
+							"Description": "The handler stack to append"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Name": "ServeMiddleware",
+					"Line": "func (m *minima) ServeMiddleware(res *Response, req *Request)",
+					"Description": "Serves and injects the middlewares to minima logic",
+					"Parameters": [
+						{
+							"Name": "res",
+							"Type": "Response",
+							"Description": "The minima response instance"
+						},
+						{
+							"Name": "req",
+							"Type": "Request",
+							"Description": "The minima req instance"
+						}
+					],
+					"Returns": {}
 				}
 			],
 			"Properties": [
@@ -562,6 +534,16 @@
 					"Name": "router",
 					"Type": "*Router",
 					"Description": "The core router instance running with the server"
+				},
+				{
+					"Name": "minmiddleware",
+					"Type": "[]Handler",
+					"Description": "The standard minima handler stack"
+				},
+				{
+					"Name": "rawmiddleware",
+					"Type": "[]http.HandlerFunc",
+					"Description": "The raw net/http minima handler stack"
 				},
 				{
 					"Name": "properties",
