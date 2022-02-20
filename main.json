@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-02-20 03:24:07.300375035 +0000 UTC m=+0.000143598"
+		"Date": "2022-02-20 03:29:12.27861222 +0000 UTC m=+0.000128603"
 	},
 	"Functions": [
 		{
@@ -703,6 +703,26 @@
 					],
 					"Returns": {
 						"Type": "string"
+					}
+				},
+				{
+					"Name": "SetParam",
+					"Line": "func (r *Request) SetParam(key string, value string) *Request",
+					"Description": "Sets param for route path",
+					"Parameters": [
+						{
+							"Name": "key",
+							"Type": "string",
+							"Description": "Key of the route param"
+						},
+						{
+							"Name": "value",
+							"Type": "string",
+							"Description": "Value of the route param"
+						}
+					],
+					"Returns": {
+						"Type": "Respone"
 					}
 				},
 				{
