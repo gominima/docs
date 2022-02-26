@@ -2,11 +2,11 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-02-22 07:28:20.650028641 +0000 UTC m=+0.000144102"
+		"Date": "2022-02-26 15:17:05.816800762 +0000 UTC m=+0.000108806"
 	},
 	"Functions": [
 		{
-			"Name": "NewConfig",
+			"Name": "*Config",
 			"Line": "func NewConfig() *Config",
 			"Description": "Make a new default config instance",
 			"Returns": {
@@ -14,7 +14,7 @@
 			}
 		},
 		{
-			"Name": "New",
+			"Name": "*minima",
 			"Line": "func New() *minima",
 			"Description": "Make a new default minima instance",
 			"Returns": {
@@ -22,7 +22,7 @@
 			}
 		},
 		{
-			"Name": "NewRoutes",
+			"Name": "*Routes",
 			"Line": "func NewRoutes() *Routes",
 			"Description": "Makes a new Routes instance",
 			"Returns": {
@@ -46,7 +46,7 @@
 				}
 			],
 			"Returns": {
-				"Type": "Handler, map[string]string, bool"
+				"Description": "{Handler, map[string]string, bool}"
 			}
 		},
 		{
@@ -116,8 +116,8 @@
 				},
 				{
 					"Name": "props",
-					"Type": "map[string]interface{",
-					"Description": "}  The net/http response instance"
+					"Type": "map[string]interface",
+					"Description": "{map[string]interface{}}  The net/http response instance"
 				}
 			],
 			"Returns": {
@@ -125,7 +125,7 @@
 			}
 		},
 		{
-			"Name": "NewRouter",
+			"Name": "*Router",
 			"Line": "func NewRouter() *Router",
 			"Description": "Make new default router interface",
 			"Returns": {}
@@ -439,8 +439,8 @@
 						},
 						{
 							"Name": "value",
-							"Type": "interface{",
-							"Description": "}  Value of the prop"
+							"Type": "interface",
+							"Description": "{interface{}}  Value of the prop"
 						}
 					],
 					"Returns": {
@@ -459,8 +459,8 @@
 						}
 					],
 					"Returns": {
-						"Type": "interface{",
-						"Description": "}"
+						"Type": "interface",
+						"Description": "{interface{}}"
 					}
 				},
 				{
@@ -541,8 +541,8 @@
 				},
 				{
 					"Name": "properties",
-					"Type": "map[string]interface{",
-					"Description": "}  The properties for the server instance"
+					"Type": "map[string]interface",
+					"Description": "{map[string]interface{}}  The properties for the server instance"
 				},
 				{
 					"Name": "Config",
@@ -630,7 +630,7 @@
 						}
 					],
 					"Returns": {
-						"Type": "Handler, map[string]string, bool"
+						"Description": "{Handler, map[string]string, bool}"
 					}
 				}
 			],
@@ -722,11 +722,11 @@
 						}
 					],
 					"Returns": {
-						"Type": "Respone"
+						"Type": "Response"
 					}
 				},
 				{
-					"Name": "GetPathURL",
+					"Name": "string",
 					"Line": "func (r *Request) GetPathURL() string",
 					"Description": "Gets request path url",
 					"Returns": {
@@ -734,7 +734,7 @@
 					}
 				},
 				{
-					"Name": "Body",
+					"Name": "map[string][]string",
 					"Line": "func (r *Request) Body() map[string][]string",
 					"Description": "Gets raw request body",
 					"Returns": {
@@ -757,7 +757,7 @@
 					}
 				},
 				{
-					"Name": "Json",
+					"Name": "*json.Decoder",
 					"Line": "func (r *Request) Json() *json.Decoder",
 					"Description": "Gets raw json decoder instance",
 					"Returns": {
@@ -765,7 +765,7 @@
 					}
 				},
 				{
-					"Name": "Method",
+					"Name": "string",
 					"Line": "func (r *Request) Method() string",
 					"Description": "Gets method of request",
 					"Returns": {
@@ -773,7 +773,7 @@
 					}
 				},
 				{
-					"Name": "Raw",
+					"Name": "*http.Request",
 					"Line": "func (r *Request) Raw() *http.Request",
 					"Description": "Gets raw net/http request instance",
 					"Returns": {
@@ -796,7 +796,7 @@
 					}
 				},
 				{
-					"Name": "Cookies",
+					"Name": "[]*http.Cookie",
 					"Line": "func (r *Request) Cookies() []*http.Cookie",
 					"Description": "Get all the cookies from the request",
 					"Returns": {
@@ -953,7 +953,7 @@
 					}
 				},
 				{
-					"Name": "Clone",
+					"Name": "http.Header",
 					"Line": "func (h *OutgoingHeader) Clone() http.Header",
 					"Description": "Clones all headers from response",
 					"Returns": {
@@ -991,13 +991,12 @@
 					}
 				},
 				{
-					"Name": "BaseHeaders",
 					"Line": "func (h *OutgoingHeader) BaseHeaders()",
 					"Description": "Sends good stack of base headers",
 					"Returns": {}
 				},
 				{
-					"Name": "Flush",
+					"Name": "bool",
 					"Line": "func (h *OutgoingHeader) Flush() bool",
 					"Description": "Flushes and writes header to route",
 					"Returns": {
@@ -1084,7 +1083,7 @@
 					}
 				},
 				{
-					"Name": "CloneHeaders",
+					"Name": "http.Header",
 					"Line": "func (res *Response) CloneHeaders() http.Header",
 					"Description": "Clones all header from response",
 					"Returns": {
@@ -1107,7 +1106,7 @@
 					}
 				},
 				{
-					"Name": "SetBaseHeaders",
+					"Name": "*Response",
 					"Line": "func (res *Response) SetBaseHeaders() *Response",
 					"Description": "Sets a good stack of base headers for response",
 					"Returns": {
@@ -1115,7 +1114,7 @@
 					}
 				},
 				{
-					"Name": "FlushHeaders",
+					"Name": "*Response",
 					"Line": "func (res *Response) FlushHeaders() *Response",
 					"Description": "Flushes headers to the response body",
 					"Returns": {
@@ -1159,8 +1158,8 @@
 					"Parameters": [
 						{
 							"Name": "content",
-							"Type": "interface{",
-							"Description": "}  The json struct to write to the page"
+							"Type": "interface",
+							"Description": "{interface{}}  The json struct to write to the page"
 						}
 					],
 					"Returns": {
@@ -1188,7 +1187,7 @@
 					}
 				},
 				{
-					"Name": "Raw",
+					"Name": "http.ResponseWriter",
 					"Line": "func (res *Response) Raw() http.ResponseWriter",
 					"Description": "Returns raw http.ResponseWriter instance",
 					"Returns": {
@@ -1207,8 +1206,8 @@
 						},
 						{
 							"Name": "data",
-							"Type": "interface{",
-							"Description": "}  The payload data to pass in html page"
+							"Type": "interface",
+							"Description": "{interface{}}  The payload data to pass in html page"
 						}
 					],
 					"Returns": {
@@ -1216,7 +1215,7 @@
 					}
 				},
 				{
-					"Name": "CloseConn",
+					"Name": "error",
 					"Line": "func (res *Response) CloseConn() error",
 					"Description": "Ends connection to the route page",
 					"Returns": {
@@ -1282,7 +1281,7 @@
 					}
 				},
 				{
-					"Name": "OK",
+					"Name": "*Response",
 					"Line": "func (res *Response) OK() *Response",
 					"Description": "Set status code as 200",
 					"Returns": {
@@ -1290,7 +1289,7 @@
 					}
 				},
 				{
-					"Name": "MovedPermanently",
+					"Name": "*Response",
 					"Line": "func (res *Response) MovedPermanently() *Response",
 					"Description": "Set status code as 301",
 					"Returns": {
@@ -1298,7 +1297,7 @@
 					}
 				},
 				{
-					"Name": "TemporaryRedirect",
+					"Name": "*Response",
 					"Line": "func (res *Response) TemporaryRedirect() *Response",
 					"Description": "Set status code as 307",
 					"Returns": {
@@ -1306,7 +1305,7 @@
 					}
 				},
 				{
-					"Name": "BadRequest",
+					"Name": "*Response",
 					"Line": "func (res *Response) BadRequest() *Response",
 					"Description": "Set status code as 400",
 					"Returns": {
@@ -1314,7 +1313,7 @@
 					}
 				},
 				{
-					"Name": "Unauthorized",
+					"Name": "*Response",
 					"Line": "func (res *Response) Unauthorized() *Response",
 					"Description": "Set status code as 401",
 					"Returns": {
@@ -1322,7 +1321,7 @@
 					}
 				},
 				{
-					"Name": "Forbidden",
+					"Name": "*Response",
 					"Line": "func (res *Response) Forbidden() *Response",
 					"Description": "Set status code as 403",
 					"Returns": {
@@ -1330,7 +1329,7 @@
 					}
 				},
 				{
-					"Name": "NotFound",
+					"Name": "*Response",
 					"Line": "func (res *Response) NotFound() *Response",
 					"Description": "Set status code as 404",
 					"Returns": {
@@ -1338,7 +1337,7 @@
 					}
 				},
 				{
-					"Name": "InternalServerError",
+					"Name": "*Response",
 					"Line": "func (res *Response) InternalServerError() *Response",
 					"Description": "Set status code as 500",
 					"Returns": {
@@ -1346,7 +1345,7 @@
 					}
 				},
 				{
-					"Name": "BadGateway",
+					"Name": "*Response",
 					"Line": "func (res *Response) BadGateway() *Response",
 					"Description": "Set status code as 502",
 					"Returns": {
@@ -1354,7 +1353,7 @@
 					}
 				},
 				{
-					"Name": "ServiceUnavailaible",
+					"Name": "*Response",
 					"Line": "func (res *Response) ServiceUnavailaible() *Response",
 					"Description": "Set status code as 503",
 					"Returns": {
@@ -1385,8 +1384,8 @@
 				},
 				{
 					"Name": "props",
-					"Type": "*map[string]interface{",
-					"Description": "}  The minima instance props"
+					"Type": "*map[string]interface",
+					"Description": "{*map[string]interface{}}  The minima instance props"
 				},
 				{
 					"Name": "host",
@@ -1397,6 +1396,23 @@
 					"Name": "HasEnded",
 					"Type": "bool",
 					"Description": "Whether the response has ended"
+				}
+			]
+		},
+		{
+			"Name": "Handler",
+			"Line": "type Handler func(res *Response, req *Request)",
+			"Description": "The Handler func structure",
+			"Properties": [
+				{
+					"Name": "res",
+					"Type": "Response",
+					"Description": "The response instance"
+				},
+				{
+					"Name": "req",
+					"Type": "Request",
+					"Description": "The request instance"
 				}
 			]
 		},
@@ -1559,7 +1575,7 @@
 					}
 				},
 				{
-					"Name": "GetRouterRoutes",
+					"Name": "map[string]*Routes",
 					"Line": "func (r *Router) GetRouterRoutes() map[string]*Routes",
 					"Description": "Returns all the routes in router",
 					"Returns": {
