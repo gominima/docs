@@ -2,11 +2,11 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-02-24 07:09:18.363543744 +0000 UTC m=+0.000134700"
+		"Date": "2022-02-26 11:14:01.218522753 +0000 UTC m=+0.000073502"
 	},
 	"Functions": [
 		{
-			"Name": "NewConfig",
+			"Name": "*Config",
 			"Line": "func NewConfig() *Config",
 			"Description": "Make a new default config instance",
 			"Returns": {
@@ -14,7 +14,7 @@
 			}
 		},
 		{
-			"Name": "New",
+			"Name": "*minima",
 			"Line": "func New() *minima",
 			"Description": "Make a new default minima instance",
 			"Returns": {
@@ -22,7 +22,7 @@
 			}
 		},
 		{
-			"Name": "NewRoutes",
+			"Name": "*Routes",
 			"Line": "func NewRoutes() *Routes",
 			"Description": "Makes a new Routes instance",
 			"Returns": {
@@ -46,7 +46,7 @@
 				}
 			],
 			"Returns": {
-				"Type": "Handler, map[string]string, bool"
+				"Description": "{Handler, map[string]string, bool}"
 			}
 		},
 		{
@@ -116,8 +116,8 @@
 				},
 				{
 					"Name": "props",
-					"Type": "map[string]interface{",
-					"Description": "}  The net/http response instance"
+					"Type": "map[string]interface",
+					"Description": "{map[string]interface{}}  The net/http response instance"
 				}
 			],
 			"Returns": {
@@ -125,7 +125,7 @@
 			}
 		},
 		{
-			"Name": "NewRouter",
+			"Name": "*Router",
 			"Line": "func NewRouter() *Router",
 			"Description": "Make new default router interface",
 			"Returns": {}
@@ -160,7 +160,7 @@
 			"Description": "The framework structure",
 			"Functions": [
 				{
-					"Name": "Listen",
+					"Name": "minima",
 					"Line": "func (m *minima) Listen(addr string) error",
 					"Description": "Starts the actual http server",
 					"Parameters": [
@@ -175,7 +175,7 @@
 					}
 				},
 				{
-					"Name": "ServeHTTP",
+					"Name": "minima",
 					"Line": "func (m *minima) ServeHTTP(w http.ResponseWriter, r *http.Request)",
 					"Description": "Injects the actual minima server logic to http",
 					"Parameters": [
@@ -193,7 +193,7 @@
 					"Returns": {}
 				},
 				{
-					"Name": "Get",
+					"Name": "minima",
 					"Line": "func (m *minima) Get(path string, handler Handler) *minima",
 					"Description": "Adds route with Get method",
 					"Parameters": [
@@ -213,7 +213,7 @@
 					}
 				},
 				{
-					"Name": "Put",
+					"Name": "minima",
 					"Line": "func (m *minima) Put(path string, handler Handler) *minima",
 					"Description": "Adds route with Put method",
 					"Parameters": [
@@ -233,7 +233,7 @@
 					}
 				},
 				{
-					"Name": "Options",
+					"Name": "minima",
 					"Line": "func (m *minima) Options(path string, handler Handler) *minima",
 					"Description": "Adds route with Options method",
 					"Parameters": [
@@ -253,7 +253,7 @@
 					}
 				},
 				{
-					"Name": "Head",
+					"Name": "minima",
 					"Line": "func (m *minima) Head(path string, handler Handler) *minima",
 					"Description": "Adds route with Head method",
 					"Parameters": [
@@ -273,7 +273,7 @@
 					}
 				},
 				{
-					"Name": "Delete",
+					"Name": "minima",
 					"Line": "func (m *minima) Delete(path string, handler Handler) *minima",
 					"Description": "Adds route with Delete method",
 					"Parameters": [
@@ -293,7 +293,7 @@
 					}
 				},
 				{
-					"Name": "Patch",
+					"Name": "minima",
 					"Line": "func (m *minima) Patch(path string, handler Handler) *minima",
 					"Description": "Adds route with Patch method",
 					"Parameters": [
@@ -313,7 +313,7 @@
 					}
 				},
 				{
-					"Name": "Post",
+					"Name": "minima",
 					"Line": "func (m *minima) Post(path string, handler Handler) *minima",
 					"Description": "Adds route with Post method",
 					"Parameters": [
@@ -333,7 +333,7 @@
 					}
 				},
 				{
-					"Name": "NotFound",
+					"Name": "minima",
 					"Line": "func (m *minima) NotFound(handler Handler) *minima",
 					"Description": "Injects the NotFound handler to the minima instance",
 					"Parameters": [
@@ -348,7 +348,7 @@
 					}
 				},
 				{
-					"Name": "UseRouter",
+					"Name": "minima",
 					"Line": "func (m *minima) UseRouter(router *Router) *minima",
 					"Description": "Injects the routes from the router to core stack",
 					"Parameters": [
@@ -363,7 +363,7 @@
 					}
 				},
 				{
-					"Name": "Mount",
+					"Name": "minima",
 					"Line": "func (m *minima) Mount(path string, router *Router) *minima",
 					"Description": "Mounts router to a specific path",
 					"Parameters": [
@@ -383,7 +383,7 @@
 					}
 				},
 				{
-					"Name": "UseConfig",
+					"Name": "minima",
 					"Line": "func (m *minima) UseConfig(config *Config) *minima",
 					"Description": "Injects middlewares and routers directly to core instance",
 					"Parameters": [
@@ -398,7 +398,7 @@
 					}
 				},
 				{
-					"Name": "ShutdownTimeout",
+					"Name": "minima",
 					"Line": "func (m *minima) ShutdownTimeout(t time.Duration) *minima",
 					"Description": "The drain timeout for the core instance",
 					"Parameters": [
@@ -413,7 +413,7 @@
 					}
 				},
 				{
-					"Name": "Shutdown",
+					"Name": "minima",
 					"Line": "func (m *minima) Shutdown(ctx context.Context) error",
 					"Description": "Shutdowns the core instance",
 					"Parameters": [
@@ -428,7 +428,7 @@
 					}
 				},
 				{
-					"Name": "SetProp",
+					"Name": "minima",
 					"Line": "func (m *minima) SetProp(key string, value interface}) *minima",
 					"Description": "Declares prop for core properties",
 					"Parameters": [
@@ -439,8 +439,8 @@
 						},
 						{
 							"Name": "value",
-							"Type": "interface{",
-							"Description": "}  Value of the prop"
+							"Type": "interface",
+							"Description": "{interface{}}  Value of the prop"
 						}
 					],
 					"Returns": {
@@ -448,7 +448,7 @@
 					}
 				},
 				{
-					"Name": "GetProp",
+					"Name": "minima",
 					"Line": "func (m *minima) GetProp(key string) interface}",
 					"Description": "Gets prop from core properties",
 					"Parameters": [
@@ -459,12 +459,12 @@
 						}
 					],
 					"Returns": {
-						"Type": "interface{",
-						"Description": "}"
+						"Type": "interface",
+						"Description": "{interface{}}"
 					}
 				},
 				{
-					"Name": "Use",
+					"Name": "minima",
 					"Line": "func (m *minima) Use(handler ...Handler)",
 					"Description": "Injects minima middleware to the stack",
 					"Parameters": [
@@ -477,7 +477,7 @@
 					"Returns": {}
 				},
 				{
-					"Name": "UseRaw",
+					"Name": "minima",
 					"Line": "func (m *minima) UseRaw(handler ...http.HandlerFunc)",
 					"Description": "Injects net/http middleware to the stack",
 					"Parameters": [
@@ -490,7 +490,7 @@
 					"Returns": {}
 				},
 				{
-					"Name": "ServeMiddleware",
+					"Name": "minima",
 					"Line": "func (m *minima) ServeMiddleware(res *Response, req *Request)",
 					"Description": "Serves and injects the middlewares to minima logic",
 					"Parameters": [
@@ -541,8 +541,8 @@
 				},
 				{
 					"Name": "properties",
-					"Type": "map[string]interface{",
-					"Description": "}  The properties for the server instance"
+					"Type": "map[string]interface",
+					"Description": "{map[string]interface{}}  The properties for the server instance"
 				},
 				{
 					"Name": "Config",
@@ -601,7 +601,7 @@
 			"Description": "The Routes root structure",
 			"Functions": [
 				{
-					"Name": "Add",
+					"Name": "Routes",
 					"Line": "func (r *Routes) Add(p string, f Handler)",
 					"Description": "Adds a new route to the routes table",
 					"Parameters": [
@@ -619,7 +619,7 @@
 					"Returns": {}
 				},
 				{
-					"Name": "Get",
+					"Name": "Routes",
 					"Line": "func (r *Routes) Get(path string) (Handler, map[string]string, bool)",
 					"Description": "Gets handler and params from the routes table",
 					"Parameters": [
@@ -630,7 +630,7 @@
 						}
 					],
 					"Returns": {
-						"Type": "Handler, map[string]string, bool"
+						"Description": "{Handler, map[string]string, bool}"
 					}
 				}
 			],
@@ -665,13 +665,13 @@
 			"Description": "The Incoming header structure",
 			"Functions": [
 				{
-					"Name": "Get",
+					"Name": "IncomingHeader",
 					"Line": "func (h IncomingHeader) Get(key string) string",
 					"Description": "Gets request header from given key",
 					"Returns": {}
 				},
 				{
-					"Name": "Set",
+					"Name": "IncomingHeader",
 					"Line": "func (h *IncomingHeader) Set(key string, v string)",
 					"Description": "Declares request header from given key",
 					"Returns": {}
@@ -691,7 +691,7 @@
 			"Description": "The request structure",
 			"Functions": [
 				{
-					"Name": "GetParam",
+					"Name": "Request",
 					"Line": "func (r *Request) GetParam(key string) string",
 					"Description": "Gets param from route path",
 					"Parameters": [
@@ -706,7 +706,7 @@
 					}
 				},
 				{
-					"Name": "SetParam",
+					"Name": "Request",
 					"Line": "func (r *Request) SetParam(key string, value string) *Request",
 					"Description": "Sets param for route path",
 					"Parameters": [
@@ -726,7 +726,7 @@
 					}
 				},
 				{
-					"Name": "GetPathURL",
+					"Name": "Request",
 					"Line": "func (r *Request) GetPathURL() string",
 					"Description": "Gets request path url",
 					"Returns": {
@@ -734,7 +734,7 @@
 					}
 				},
 				{
-					"Name": "Body",
+					"Name": "Request",
 					"Line": "func (r *Request) Body() map[string][]string",
 					"Description": "Gets raw request body",
 					"Returns": {
@@ -742,7 +742,7 @@
 					}
 				},
 				{
-					"Name": "GetBodyValue",
+					"Name": "Request",
 					"Line": "func (r *Request) GetBodyValue(key string) []string",
 					"Description": "Gets specified request body",
 					"Parameters": [
@@ -757,7 +757,7 @@
 					}
 				},
 				{
-					"Name": "Json",
+					"Name": "Request",
 					"Line": "func (r *Request) Json() *json.Decoder",
 					"Description": "Gets raw json decoder instance",
 					"Returns": {
@@ -765,7 +765,7 @@
 					}
 				},
 				{
-					"Name": "Method",
+					"Name": "Request",
 					"Line": "func (r *Request) Method() string",
 					"Description": "Gets method of request",
 					"Returns": {
@@ -773,7 +773,7 @@
 					}
 				},
 				{
-					"Name": "Raw",
+					"Name": "Request",
 					"Line": "func (r *Request) Raw() *http.Request",
 					"Description": "Gets raw net/http request instance",
 					"Returns": {
@@ -781,7 +781,7 @@
 					}
 				},
 				{
-					"Name": "GetQuery",
+					"Name": "Request",
 					"Line": "func (r *Request) GetQuery(key string) string",
 					"Description": "Gets request path query",
 					"Parameters": [
@@ -796,7 +796,7 @@
 					}
 				},
 				{
-					"Name": "Cookies",
+					"Name": "Request",
 					"Line": "func (r *Request) Cookies() []*http.Cookie",
 					"Description": "Get all the cookies from the request",
 					"Returns": {
@@ -804,7 +804,7 @@
 					}
 				},
 				{
-					"Name": "Cookie",
+					"Name": "Request",
 					"Line": "func (r *Request) Cookie(key string) *http.Cookie",
 					"Description": "Get a paticular cookie by its key",
 					"Parameters": [
@@ -819,7 +819,7 @@
 					}
 				},
 				{
-					"Name": "SetHeader",
+					"Name": "Request",
 					"Line": "func (r *Request) SetHeader(key string, value string) *Request",
 					"Description": "Set a paticular Header",
 					"Parameters": [
@@ -839,7 +839,7 @@
 					}
 				},
 				{
-					"Name": "GetHeader",
+					"Name": "Request",
 					"Line": "func (r *Request) GetHeader(key string) string",
 					"Description": "Get a paticular Header by its key",
 					"Parameters": [
@@ -903,7 +903,7 @@
 			"Description": "The Outgoing header structure",
 			"Functions": [
 				{
-					"Name": "Set",
+					"Name": "OutgoingHeader",
 					"Line": "func (h *OutgoingHeader) Set(key string, value string) *OutgoingHeader",
 					"Description": "Sets and new header to response",
 					"Parameters": [
@@ -923,7 +923,7 @@
 					}
 				},
 				{
-					"Name": "Get",
+					"Name": "OutgoingHeader",
 					"Line": "func (h *OutgoingHeader) Get(key string) string",
 					"Description": "Gets the header from response headers",
 					"Parameters": [
@@ -938,7 +938,7 @@
 					}
 				},
 				{
-					"Name": "Del",
+					"Name": "OutgoingHeader",
 					"Line": "func (h *OutgoingHeader) Del(key string) *OutgoingHeader",
 					"Description": "Deletes header from respose",
 					"Parameters": [
@@ -953,7 +953,7 @@
 					}
 				},
 				{
-					"Name": "Clone",
+					"Name": "OutgoingHeader",
 					"Line": "func (h *OutgoingHeader) Clone() http.Header",
 					"Description": "Clones all headers from response",
 					"Returns": {
@@ -961,7 +961,7 @@
 					}
 				},
 				{
-					"Name": "Setlength",
+					"Name": "OutgoingHeader",
 					"Line": "func (h *OutgoingHeader) Setlength(len string) *OutgoingHeader",
 					"Description": "Sets content lenght",
 					"Parameters": [
@@ -976,7 +976,7 @@
 					}
 				},
 				{
-					"Name": "Status",
+					"Name": "OutgoingHeader",
 					"Line": "func (h *OutgoingHeader) Status(code int) *OutgoingHeader",
 					"Description": "Sets response status",
 					"Parameters": [
@@ -991,13 +991,13 @@
 					}
 				},
 				{
-					"Name": "BaseHeaders",
+					"Name": "OutgoingHeader",
 					"Line": "func (h *OutgoingHeader) BaseHeaders()",
 					"Description": "Sends good stack of base headers",
 					"Returns": {}
 				},
 				{
-					"Name": "Flush",
+					"Name": "OutgoingHeader",
 					"Line": "func (h *OutgoingHeader) Flush() bool",
 					"Description": "Flushes and writes header to route",
 					"Returns": {
@@ -1034,7 +1034,7 @@
 			"Description": "The response instance structure",
 			"Functions": [
 				{
-					"Name": "GetHeader",
+					"Name": "Response",
 					"Line": "func (res *Response) GetHeader(key string) string",
 					"Description": "Gets header from response",
 					"Parameters": [
@@ -1049,7 +1049,7 @@
 					}
 				},
 				{
-					"Name": "SetHeader",
+					"Name": "Response",
 					"Line": "func (res *Response) SetHeader(key string, value string) *Response",
 					"Description": "Sets headers for response",
 					"Parameters": [
@@ -1069,7 +1069,7 @@
 					}
 				},
 				{
-					"Name": "DelHeader",
+					"Name": "Response",
 					"Line": "func (res *Response) DelHeader(key string) *Response",
 					"Description": "Gets header from response",
 					"Parameters": [
@@ -1084,7 +1084,7 @@
 					}
 				},
 				{
-					"Name": "CloneHeaders",
+					"Name": "Response",
 					"Line": "func (res *Response) CloneHeaders() http.Header",
 					"Description": "Clones all header from response",
 					"Returns": {
@@ -1092,7 +1092,7 @@
 					}
 				},
 				{
-					"Name": "Setlength",
+					"Name": "Response",
 					"Line": "func (res *Response) Setlength(len string) *Response",
 					"Description": "Sets length of the response body",
 					"Parameters": [
@@ -1107,7 +1107,7 @@
 					}
 				},
 				{
-					"Name": "SetBaseHeaders",
+					"Name": "Response",
 					"Line": "func (res *Response) SetBaseHeaders() *Response",
 					"Description": "Sets a good stack of base headers for response",
 					"Returns": {
@@ -1115,7 +1115,7 @@
 					}
 				},
 				{
-					"Name": "FlushHeaders",
+					"Name": "Response",
 					"Line": "func (res *Response) FlushHeaders() *Response",
 					"Description": "Flushes headers to the response body",
 					"Returns": {
@@ -1123,7 +1123,7 @@
 					}
 				},
 				{
-					"Name": "Send",
+					"Name": "Response",
 					"Line": "func (res *Response) Send(content string) *Response",
 					"Description": "Sends string to the route",
 					"Parameters": [
@@ -1138,7 +1138,7 @@
 					}
 				},
 				{
-					"Name": "WriteBytes",
+					"Name": "Response",
 					"Line": "func (res *Response) WriteBytes(bytes []byte) error",
 					"Description": "Writes bytes to the route",
 					"Parameters": [
@@ -1153,14 +1153,14 @@
 					}
 				},
 				{
-					"Name": "Json",
+					"Name": "Response",
 					"Line": "func (res *Response) Json(content interface}) *Response",
 					"Description": "Writes json content to the route",
 					"Parameters": [
 						{
 							"Name": "content",
-							"Type": "interface{",
-							"Description": "}  The json struct to write to the page"
+							"Type": "interface",
+							"Description": "{interface{}}  The json struct to write to the page"
 						}
 					],
 					"Returns": {
@@ -1168,7 +1168,7 @@
 					}
 				},
 				{
-					"Name": "Error",
+					"Name": "Response",
 					"Line": "func (res *Response) Error(status int, err string) *Response",
 					"Description": "Returns error to the route",
 					"Parameters": [
@@ -1188,7 +1188,7 @@
 					}
 				},
 				{
-					"Name": "Raw",
+					"Name": "Response",
 					"Line": "func (res *Response) Raw() http.ResponseWriter",
 					"Description": "Returns raw http.ResponseWriter instance",
 					"Returns": {
@@ -1196,7 +1196,7 @@
 					}
 				},
 				{
-					"Name": "Render",
+					"Name": "Response",
 					"Line": "func (res *Response) Render(path string, data interface}) *Response",
 					"Description": "Renders a html page with payload data to the route",
 					"Parameters": [
@@ -1207,8 +1207,8 @@
 						},
 						{
 							"Name": "data",
-							"Type": "interface{",
-							"Description": "}  The payload data to pass in html page"
+							"Type": "interface",
+							"Description": "{interface{}}  The payload data to pass in html page"
 						}
 					],
 					"Returns": {
@@ -1216,7 +1216,7 @@
 					}
 				},
 				{
-					"Name": "CloseConn",
+					"Name": "Response",
 					"Line": "func (res *Response) CloseConn() error",
 					"Description": "Ends connection to the route page",
 					"Returns": {
@@ -1224,7 +1224,7 @@
 					}
 				},
 				{
-					"Name": "Redirect",
+					"Name": "Response",
 					"Line": "func (res *Response) Redirect(url string) *Response",
 					"Description": "Redirects to a different route",
 					"Parameters": [
@@ -1239,7 +1239,7 @@
 					}
 				},
 				{
-					"Name": "Status",
+					"Name": "Response",
 					"Line": "func (res *Response) Status(status int) *Response",
 					"Description": "Sets response status",
 					"Parameters": [
@@ -1254,7 +1254,7 @@
 					}
 				},
 				{
-					"Name": "SetCookie",
+					"Name": "Response",
 					"Line": "func (res *Response) SetCookie(cookie *http.Cookie) *Response",
 					"Description": "Set a cookie",
 					"Parameters": [
@@ -1268,7 +1268,7 @@
 					}
 				},
 				{
-					"Name": "ClearCookie",
+					"Name": "Response",
 					"Line": "func (res *Response) ClearCookie(cookie *http.Cookie) *Response",
 					"Description": "Clear a cookie",
 					"Parameters": [
@@ -1282,7 +1282,7 @@
 					}
 				},
 				{
-					"Name": "OK",
+					"Name": "Response",
 					"Line": "func (res *Response) OK() *Response",
 					"Description": "Set status code as 200",
 					"Returns": {
@@ -1290,7 +1290,7 @@
 					}
 				},
 				{
-					"Name": "MovedPermanently",
+					"Name": "Response",
 					"Line": "func (res *Response) MovedPermanently() *Response",
 					"Description": "Set status code as 301",
 					"Returns": {
@@ -1298,7 +1298,7 @@
 					}
 				},
 				{
-					"Name": "TemporaryRedirect",
+					"Name": "Response",
 					"Line": "func (res *Response) TemporaryRedirect() *Response",
 					"Description": "Set status code as 307",
 					"Returns": {
@@ -1306,7 +1306,7 @@
 					}
 				},
 				{
-					"Name": "BadRequest",
+					"Name": "Response",
 					"Line": "func (res *Response) BadRequest() *Response",
 					"Description": "Set status code as 400",
 					"Returns": {
@@ -1314,7 +1314,7 @@
 					}
 				},
 				{
-					"Name": "Unauthorized",
+					"Name": "Response",
 					"Line": "func (res *Response) Unauthorized() *Response",
 					"Description": "Set status code as 401",
 					"Returns": {
@@ -1322,7 +1322,7 @@
 					}
 				},
 				{
-					"Name": "Forbidden",
+					"Name": "Response",
 					"Line": "func (res *Response) Forbidden() *Response",
 					"Description": "Set status code as 403",
 					"Returns": {
@@ -1330,7 +1330,7 @@
 					}
 				},
 				{
-					"Name": "NotFound",
+					"Name": "Response",
 					"Line": "func (res *Response) NotFound() *Response",
 					"Description": "Set status code as 404",
 					"Returns": {
@@ -1338,7 +1338,7 @@
 					}
 				},
 				{
-					"Name": "InternalServerError",
+					"Name": "Response",
 					"Line": "func (res *Response) InternalServerError() *Response",
 					"Description": "Set status code as 500",
 					"Returns": {
@@ -1346,7 +1346,7 @@
 					}
 				},
 				{
-					"Name": "BadGateway",
+					"Name": "Response",
 					"Line": "func (res *Response) BadGateway() *Response",
 					"Description": "Set status code as 502",
 					"Returns": {
@@ -1354,7 +1354,7 @@
 					}
 				},
 				{
-					"Name": "ServiceUnavailaible",
+					"Name": "Response",
 					"Line": "func (res *Response) ServiceUnavailaible() *Response",
 					"Description": "Set status code as 503",
 					"Returns": {
@@ -1385,8 +1385,8 @@
 				},
 				{
 					"Name": "props",
-					"Type": "*map[string]interface{",
-					"Description": "}  The minima instance props"
+					"Type": "*map[string]interface",
+					"Description": "{*map[string]interface{}}  The minima instance props"
 				},
 				{
 					"Name": "host",
@@ -1401,12 +1401,29 @@
 			]
 		},
 		{
+			"Name": "Handler",
+			"Line": "type Handler func(res *Response, req *Request)",
+			"Description": "The Handler func structure",
+			"Properties": [
+				{
+					"Name": "res",
+					"Type": "Response",
+					"Description": "The response instance"
+				},
+				{
+					"Name": "req",
+					"Type": "Request",
+					"Description": "The request instance"
+				}
+			]
+		},
+		{
 			"Name": "Router",
 			"Line": "type Router struct",
 			"Description": "The router structure",
 			"Functions": [
 				{
-					"Name": "Register",
+					"Name": "Router",
 					"Line": "func (r *Router) Register(method string, path string, handler Handler) error",
 					"Description": "Registers a new route to router interface",
 					"Parameters": [
@@ -1419,7 +1436,7 @@
 					"Returns": {}
 				},
 				{
-					"Name": "Get",
+					"Name": "Router",
 					"Line": "func (r *Router) Get(path string, handler Handler) *Router",
 					"Description": "Adds route with Get method",
 					"Parameters": [
@@ -1439,7 +1456,7 @@
 					}
 				},
 				{
-					"Name": "Post",
+					"Name": "Router",
 					"Line": "func (r *Router) Post(path string, handler Handler) *Router",
 					"Description": "Adds route with Post method",
 					"Parameters": [
@@ -1459,7 +1476,7 @@
 					}
 				},
 				{
-					"Name": "Put",
+					"Name": "Router",
 					"Line": "func (r *Router) Put(path string, handler Handler) *Router",
 					"Description": "Adds route with Put method",
 					"Parameters": [
@@ -1479,7 +1496,7 @@
 					}
 				},
 				{
-					"Name": "Patch",
+					"Name": "Router",
 					"Line": "func (r *Router) Patch(path string, handler Handler)",
 					"Description": "Adds route with Patch method",
 					"Parameters": [
@@ -1499,7 +1516,7 @@
 					}
 				},
 				{
-					"Name": "Options",
+					"Name": "Router",
 					"Line": "func (r *Router) Options(path string, handler Handler) *Router",
 					"Description": "Adds route with Options method",
 					"Parameters": [
@@ -1519,7 +1536,7 @@
 					}
 				},
 				{
-					"Name": "Head",
+					"Name": "Router",
 					"Line": "func (r *Router) Head(path string, handler Handler) *Router",
 					"Description": "Adds route with Head method",
 					"Parameters": [
@@ -1539,7 +1556,7 @@
 					}
 				},
 				{
-					"Name": "Delete",
+					"Name": "Router",
 					"Line": "func (r *Router) Delete(path string, handler Handler) *Router",
 					"Description": "Adds route with Delete method",
 					"Parameters": [
@@ -1559,7 +1576,7 @@
 					}
 				},
 				{
-					"Name": "GetRouterRoutes",
+					"Name": "Router",
 					"Line": "func (r *Router) GetRouterRoutes() map[string]*Routes",
 					"Description": "Returns all the routes in router",
 					"Returns": {
@@ -1567,7 +1584,7 @@
 					}
 				},
 				{
-					"Name": "UseRouter",
+					"Name": "Router",
 					"Line": "func (r *Router) UseRouter(Router *Router) *Router",
 					"Description": "Appends all routes to core router instance",
 					"Parameters": [
@@ -1582,7 +1599,7 @@
 					}
 				},
 				{
-					"Name": "Mount",
+					"Name": "Router",
 					"Line": "func (r *Router) Mount(path string, Router *Router) *Router",
 					"Description": "Mounts router to a specific path",
 					"Parameters": [
