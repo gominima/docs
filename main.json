@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-01 09:04:21.06635895 +0000 UTC m=+0.000060644"
+		"Date": "2022-03-01 15:56:03.634526231 +0000 UTC m=+0.000063101"
 	},
 	"Functions": [
 		{
@@ -252,10 +252,6 @@
 			]
 		},
 		{
-			"Name": "ReqHeader",
-			"Line": "type ReqHeader struct"
-		},
-		{
 			"Name": "IncomingHeader",
 			"Line": "type IncomingHeader struct",
 			"Functions": [
@@ -316,8 +312,8 @@
 					"Returns": {}
 				},
 				{
-					"Name": "GetQuery",
-					"Line": "func (r *Request) GetQuery(key string) string",
+					"Name": "GetQueryParam",
+					"Line": "func (r *Request) GetQueryParam(key string) string",
 					"Returns": {}
 				},
 				{
@@ -326,8 +322,8 @@
 					"Returns": {}
 				},
 				{
-					"Name": "Cookie",
-					"Line": "func (r *Request) Cookie(key string) *http.Cookie",
+					"Name": "GetCookie",
+					"Line": "func (r *Request) GetCookie(key string) *http.Cookie",
 					"Returns": {}
 				},
 				{
