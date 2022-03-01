@@ -1,0 +1,657 @@
+{
+	"Meta": {
+		"Generator": "1",
+		"Format": "1",
+		"Date": "2022-03-01 08:53:34.643858455 +0000 UTC m=+0.000068409"
+	},
+	"Functions": [
+		{
+			"Name": "Chain",
+			"Line": "func Chain(middlewares ...func(http.Handler) http.Handler) Middlewares",
+			"Description": "Create a middleware chain",
+			"Returns": {}
+		},
+		{
+			"Name": "chain",
+			"Line": "func chain(middlewares []func(http.Handler) http.Handler, endpoint http.Handler) http.Handler",
+			"Description": "Builds the whole chain into one singular http.Handler",
+			"Parameters": [
+				{
+					"Name": "middleware",
+					"Type": "[]func(http.Handler)http.Handler",
+					"Description": "The array of middleware stack"
+				},
+				{
+					"Name": "endpoint",
+					"Type": "http.Handler",
+					"Description": "The endpoint of the chain stack"
+				}
+			],
+			"Returns": {
+				"Type": "http.Handler"
+			}
+		},
+		{
+			"Name": "*minima",
+			"Line": "func New() *minima",
+			"Returns": {}
+		},
+		{
+			"Name": "*Routes",
+			"Line": "func NewRoutes() *Routes",
+			"Returns": {}
+		},
+		{
+			"Name": "matchRoutes",
+			"Line": "func matchRoutes(path string, routes []Route) (Handler, map[string]string, bool)",
+			"Returns": {}
+		},
+		{
+			"Name": "cleanArray",
+			"Line": "func cleanArray(a []string) []string",
+			"Returns": {}
+		},
+		{
+			"Name": "request",
+			"Line": "func request(httpRequest *http.Request) *Request",
+			"Returns": {}
+		},
+		{
+			"Name": "NewResHeader",
+			"Line": "func NewResHeader(res http.ResponseWriter, req *http.Request) *OutgoingHeader",
+			"Returns": {}
+		},
+		{
+			"Name": "response",
+			"Line": "func response(rw http.ResponseWriter, req *http.Request) *Response",
+			"Returns": {}
+		},
+		{
+			"Name": "*Router",
+			"Line": "func NewRouter() *Router",
+			"Returns": {}
+		}
+	],
+	"Structures": [
+		{
+			"Name": "ChainHandler",
+			"Line": "type ChainHandler struct",
+			"Description": "Create a middleware chain",
+			"Functions": [
+				{
+					"Name": "ServeHTTP",
+					"Line": "func (c *ChainHandler) ServeHTTP(w http.ResponseWriter, r *http.Request)",
+					"Description": "Injects the middleware chain to minima instance",
+					"Parameters": [
+						{
+							"Name": "w",
+							"Type": "http.ResponseWriter",
+							"Description": "The net/http response instance"
+						},
+						{
+							"Name": "r",
+							"Type": "http.Request",
+							"Description": "The net/http request instance"
+						}
+					],
+					"Returns": {}
+				}
+			],
+			"Properties": [
+				{
+					"Name": "Endpoint",
+					"Type": "http.Handler",
+					"Description": "The endpoint of the chain stack"
+				},
+				{
+					"Name": "chain",
+					"Type": "http.Handler",
+					"Description": "The actual middleware stack chain"
+				},
+				{
+					"Name": "Middlewares",
+					"Type": "Middlewares",
+					"Description": "The middleware stack"
+				}
+			]
+		},
+		{
+			"Name": "minima",
+			"Line": "type minima struct",
+			"Functions": [
+				{
+					"Name": "Listen",
+					"Line": "func (m *minima) Listen(addr string) error",
+					"Returns": {}
+				},
+				{
+					"Name": "ServeHTTP",
+					"Line": "func (m *minima) ServeHTTP(w http.ResponseWriter, r *http.Request)",
+					"Returns": {}
+				},
+				{
+					"Name": "Get",
+					"Line": "func (m *minima) Get(path string, handler Handler) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "Put",
+					"Line": "func (m *minima) Put(path string, handler Handler) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "Options",
+					"Line": "func (m *minima) Options(path string, handler Handler) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "Head",
+					"Line": "func (m *minima) Head(path string, handler Handler) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "Delete",
+					"Line": "func (m *minima) Delete(path string, handler Handler) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "Patch",
+					"Line": "func (m *minima) Patch(path string, handler Handler) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "Post",
+					"Line": "func (m *minima) Post(path string, handler Handler) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "NotFound",
+					"Line": "func (m *minima) NotFound(handler Handler) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "UseRouter",
+					"Line": "func (m *minima) UseRouter(router *Router) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "Mount",
+					"Line": "func (m *minima) Mount(path string, router *Router) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "ShutdownTimeout",
+					"Line": "func (m *minima) ShutdownTimeout(t time.Duration) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "Shutdown",
+					"Line": "func (m *minima) Shutdown(ctx context.Context) error",
+					"Returns": {}
+				},
+				{
+					"Name": "SetProp",
+					"Line": "func (m *minima) SetProp(key string, value interface}) *minima",
+					"Returns": {}
+				},
+				{
+					"Name": "GetProp",
+					"Line": "func (m *minima) GetProp(key string) interface}",
+					"Returns": {}
+				},
+				{
+					"Name": "Use",
+					"Line": "func (m *minima) Use(handler ...Handler) *minima",
+					"Description": "Injects Minima middleware to the stack",
+					"Parameters": [
+						{
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler stack to append"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Name": "UseRaw",
+					"Line": "func (m *minima) UseRaw(handler ...func(http.Handler) http.Handler) *minima",
+					"Description": "Injects net/http middleware to the stack",
+					"Parameters": [
+						{
+							"Name": "handler",
+							"Type": "...http.HandlerFunc",
+							"Description": "The handler stack to append"
+						}
+					],
+					"Returns": {}
+				}
+			]
+		},
+		{
+			"Name": "param",
+			"Line": "type param struct"
+		},
+		{
+			"Name": "Route",
+			"Line": "type Route struct"
+		},
+		{
+			"Name": "Routes",
+			"Line": "type Routes struct",
+			"Functions": [
+				{
+					"Name": "Add",
+					"Line": "func (r *Routes) Add(path string, f Handler)",
+					"Returns": {}
+				},
+				{
+					"Name": "Get",
+					"Line": "func (r *Routes) Get(path string) (Handler, map[string]string, bool)",
+					"Returns": {}
+				}
+			]
+		},
+		{
+			"Name": "ReqHeader",
+			"Line": "type ReqHeader struct"
+		},
+		{
+			"Name": "IncomingHeader",
+			"Line": "type IncomingHeader struct",
+			"Functions": [
+				{
+					"Name": "Get",
+					"Line": "func (h IncomingHeader) Get(key string) string",
+					"Returns": {}
+				},
+				{
+					"Name": "Set",
+					"Line": "func (h *IncomingHeader) Set(key string, v string)",
+					"Returns": {}
+				}
+			]
+		},
+		{
+			"Name": "Request",
+			"Line": "type Request struct",
+			"Functions": [
+				{
+					"Name": "GetParam",
+					"Line": "func (r *Request) GetParam(key string) string",
+					"Returns": {}
+				},
+				{
+					"Name": "SetParam",
+					"Line": "func (r *Request) SetParam(key string, value string) *Request",
+					"Returns": {}
+				},
+				{
+					"Name": "string",
+					"Line": "func (r *Request) GetPathURL() string",
+					"Returns": {}
+				},
+				{
+					"Name": "map[string][]string",
+					"Line": "func (r *Request) Body() map[string][]string",
+					"Returns": {}
+				},
+				{
+					"Name": "GetBodyValue",
+					"Line": "func (r *Request) GetBodyValue(key string) []string",
+					"Returns": {}
+				},
+				{
+					"Name": "*json.Decoder",
+					"Line": "func (r *Request) Json() *json.Decoder",
+					"Returns": {}
+				},
+				{
+					"Name": "string",
+					"Line": "func (r *Request) Method() string",
+					"Returns": {}
+				},
+				{
+					"Name": "*http.Request",
+					"Line": "func (r *Request) Raw() *http.Request",
+					"Returns": {}
+				},
+				{
+					"Name": "GetQuery",
+					"Line": "func (r *Request) GetQuery(key string) string",
+					"Returns": {}
+				},
+				{
+					"Name": "[]*http.Cookie",
+					"Line": "func (r *Request) Cookies() []*http.Cookie",
+					"Returns": {}
+				},
+				{
+					"Name": "Cookie",
+					"Line": "func (r *Request) Cookie(key string) *http.Cookie",
+					"Returns": {}
+				},
+				{
+					"Name": "SetHeader",
+					"Line": "func (r *Request) SetHeader(key string, value string) *Request",
+					"Returns": {}
+				},
+				{
+					"Name": "GetHeader",
+					"Line": "func (r *Request) GetHeader(key string) string",
+					"Returns": {}
+				}
+			]
+		},
+		{
+			"Name": "OutgoingHeader",
+			"Line": "type OutgoingHeader struct",
+			"Functions": [
+				{
+					"Name": "Set",
+					"Line": "func (h *OutgoingHeader) Set(key string, value string) *OutgoingHeader",
+					"Returns": {}
+				},
+				{
+					"Name": "Get",
+					"Line": "func (h *OutgoingHeader) Get(key string) string",
+					"Returns": {}
+				},
+				{
+					"Name": "Del",
+					"Line": "func (h *OutgoingHeader) Del(key string) *OutgoingHeader",
+					"Returns": {}
+				},
+				{
+					"Name": "http.Header",
+					"Line": "func (h *OutgoingHeader) Clone() http.Header",
+					"Returns": {}
+				},
+				{
+					"Name": "Setlength",
+					"Line": "func (h *OutgoingHeader) Setlength(len string) *OutgoingHeader",
+					"Returns": {}
+				},
+				{
+					"Name": "Status",
+					"Line": "func (h *OutgoingHeader) Status(code int) *OutgoingHeader",
+					"Returns": {}
+				},
+				{
+					"Line": "func (h *OutgoingHeader) BaseHeaders()",
+					"Returns": {}
+				},
+				{
+					"Name": "bool",
+					"Line": "func (h *OutgoingHeader) Flush() bool",
+					"Returns": {}
+				}
+			]
+		},
+		{
+			"Name": "Response",
+			"Line": "type Response struct",
+			"Functions": [
+				{
+					"Name": "GetHeader",
+					"Line": "func (res *Response) GetHeader(key string) string",
+					"Returns": {}
+				},
+				{
+					"Name": "SetHeader",
+					"Line": "func (res *Response) SetHeader(key string, value string) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "DelHeader",
+					"Line": "func (res *Response) DelHeader(key string) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "http.Header",
+					"Line": "func (res *Response) CloneHeaders() http.Header",
+					"Returns": {}
+				},
+				{
+					"Name": "Setlength",
+					"Line": "func (res *Response) Setlength(len string) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) SetBaseHeaders() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) FlushHeaders() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "Send",
+					"Line": "func (res *Response) Send(content string) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "WriteBytes",
+					"Line": "func (res *Response) WriteBytes(bytes []byte) error",
+					"Returns": {}
+				},
+				{
+					"Name": "Json",
+					"Line": "func (res *Response) Json(content interface}) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "Error",
+					"Line": "func (res *Response) Error(status int, err string) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "http.ResponseWriter",
+					"Line": "func (res *Response) Raw() http.ResponseWriter",
+					"Returns": {}
+				},
+				{
+					"Name": "Render",
+					"Line": "func (res *Response) Render(path string, data interface}) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "error",
+					"Line": "func (res *Response) CloseConn() error",
+					"Returns": {}
+				},
+				{
+					"Name": "Redirect",
+					"Line": "func (res *Response) Redirect(url string) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "Status",
+					"Line": "func (res *Response) Status(status int) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "SetCookie",
+					"Line": "func (res *Response) SetCookie(cookie *http.Cookie) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "ClearCookie",
+					"Line": "func (res *Response) ClearCookie(cookie *http.Cookie) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) OK() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) MovedPermanently() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) TemporaryRedirect() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) BadRequest() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) Unauthorized() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) Forbidden() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) NotFound() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) InternalServerError() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) BadGateway() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) ServiceUnavailaible() *Response",
+					"Returns": {}
+				}
+			]
+		},
+		{
+			"Name": "Router",
+			"Line": "type Router struct",
+			"Description": "The router structure",
+			"Functions": [
+				{
+					"Name": "Register",
+					"Line": "func (r *Router) Register(method string, path string, handler Handler) error",
+					"Returns": {}
+				},
+				{
+					"Name": "Get",
+					"Line": "func (r *Router) Get(path string, handler Handler) *Router",
+					"Returns": {}
+				},
+				{
+					"Name": "Post",
+					"Line": "func (r *Router) Post(path string, handler Handler) *Router",
+					"Returns": {}
+				},
+				{
+					"Name": "Put",
+					"Line": "func (r *Router) Put(path string, handler Handler) *Router",
+					"Returns": {}
+				},
+				{
+					"Name": "Patch",
+					"Line": "func (r *Router) Patch(path string, handler Handler)",
+					"Returns": {}
+				},
+				{
+					"Name": "Options",
+					"Line": "func (r *Router) Options(path string, handler Handler) *Router",
+					"Returns": {}
+				},
+				{
+					"Name": "Head",
+					"Line": "func (r *Router) Head(path string, handler Handler) *Router",
+					"Returns": {}
+				},
+				{
+					"Name": "Delete",
+					"Line": "func (r *Router) Delete(path string, handler Handler) *Router",
+					"Returns": {}
+				},
+				{
+					"Name": "map[string]*Routes",
+					"Line": "func (r *Router) GetRouterRoutes() map[string]*Routes",
+					"Returns": {}
+				},
+				{
+					"Name": "UseRouter",
+					"Line": "func (r *Router) UseRouter(Router *Router) *Router",
+					"Returns": {}
+				},
+				{
+					"Name": "Mount",
+					"Line": "func (r *Router) Mount(path string, Router *Router) *Router",
+					"Returns": {}
+				},
+				{
+					"Name": "use",
+					"Line": "func (r *Router) use(handler ...Handler)",
+					"Description": "Injects Minima middleware to the stack",
+					"Parameters": [
+						{
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler stack to append"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Name": "useRaw",
+					"Line": "func (r *Router) useRaw(handler ...func(http.Handler) http.Handler)",
+					"Description": "Injects net/http middleware to the stack",
+					"Parameters": [
+						{
+							"Name": "handler",
+							"Type": "...func(http.Handler)http.Handler",
+							"Description": "The handler stack to append"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Line": "func (r *Router) buildHandler()",
+					"Description": "Builds whole middleware stack chain into single handler",
+					"Returns": {}
+				}
+			],
+			"Properties": [
+				{
+					"Name": "routes",
+					"Type": "map[string][]*Routes",
+					"Description": "The mux routes"
+				},
+				{
+					"Name": "notfound",
+					"Type": "Handler",
+					"Description": "The handler for the non matching routes"
+				},
+				{
+					"Name": "minmiddleware",
+					"Type": "[]Handler",
+					"Description": "The minima handler middleware stack"
+				},
+				{
+					"Name": "middleware",
+					"Type": "[]func(http.Handler)http.Handler",
+					"Description": "The http.Handler middleware stack"
+				},
+				{
+					"Name": "handler",
+					"Type": "http.Handler",
+					"Description": "The single http.Handler built on chaining the whole middleware stack"
+				}
+			]
+		}
+	]
+}
