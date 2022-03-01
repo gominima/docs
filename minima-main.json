@@ -2,23 +2,41 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-01 03:13:47.574098777 +0000 UTC m=+0.000073404"
+		"Date": "2022-03-01 08:55:16.752046772 +0000 UTC m=+0.000068589"
 	},
 	"Functions": [
+		{
+			"Name": "Chain",
+			"Line": "func Chain(middlewares ...func(http.Handler) http.Handler) Middlewares",
+			"Description": "Create a middleware chain",
+			"Returns": {}
+		},
+		{
+			"Name": "chain",
+			"Line": "func chain(middlewares []func(http.Handler) http.Handler, endpoint http.Handler) http.Handler",
+			"Description": "Builds the whole chain into one singular http.Handler",
+			"Parameters": [
+				{
+					"Name": "middleware",
+					"Type": "[]func(http.Handler)http.Handler",
+					"Description": "The array of middleware stack"
+				},
+				{
+					"Name": "endpoint",
+					"Type": "http.Handler",
+					"Description": "The endpoint of the chain stack"
+				}
+			],
+			"Returns": {
+				"Type": "http.Handler"
+			}
+		},
 		{
 			"Name": "*Config",
 			"Line": "func NewConfig() *Config",
 			"Description": "Make a new default config instance",
 			"Returns": {
 				"Type": "Config"
-			}
-		},
-		{
-			"Name": "*Minima",
-			"Line": "func New() *Minima",
-			"Description": "Make a new default Minima instance",
-			"Returns": {
-				"Type": "Minima"
 			}
 		},
 		{
@@ -132,6 +150,48 @@
 		}
 	],
 	"Structures": [
+		{
+			"Name": "ChainHandler",
+			"Line": "type ChainHandler struct",
+			"Description": "Create a middleware chain",
+			"Functions": [
+				{
+					"Name": "ServeHTTP",
+					"Line": "func (c *ChainHandler) ServeHTTP(w http.ResponseWriter, r *http.Request)",
+					"Description": "Injects the middleware chain to minima instance",
+					"Parameters": [
+						{
+							"Name": "w",
+							"Type": "http.ResponseWriter",
+							"Description": "The net/http response instance"
+						},
+						{
+							"Name": "r",
+							"Type": "http.Request",
+							"Description": "The net/http request instance"
+						}
+					],
+					"Returns": {}
+				}
+			],
+			"Properties": [
+				{
+					"Name": "Endpoint",
+					"Type": "http.Handler",
+					"Description": "The endpoint of the chain stack"
+				},
+				{
+					"Name": "chain",
+					"Type": "http.Handler",
+					"Description": "The actual middleware stack chain"
+				},
+				{
+					"Name": "Middlewares",
+					"Type": "Middlewares",
+					"Description": "The middleware stack"
+				}
+			]
+		},
 		{
 			"Name": "Config",
 			"Line": "type Config struct",
@@ -462,19 +522,6 @@
 						"Type": "interface",
 						"Description": "{interface{}}"
 					}
-				},
-				{
-					"Name": "Use",
-					"Line": "func (m *Minima) Use(handler ...Handler)",
-					"Description": "Injects Minima middleware to the stack",
-					"Parameters": [
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler stack to append"
-						}
-					],
-					"Returns": {}
 				},
 				{
 					"Name": "UseRaw",
@@ -1028,395 +1075,6 @@
 			]
 		},
 		{
-			"Name": "Response",
-			"Line": "type Response struct",
-			"Description": "The response instance structure",
-			"Functions": [
-				{
-					"Name": "GetHeader",
-					"Line": "func (res *Response) GetHeader(key string) string",
-					"Description": "Gets header from response",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "Key of the header"
-						}
-					],
-					"Returns": {
-						"Type": "string"
-					}
-				},
-				{
-					"Name": "SetHeader",
-					"Line": "func (res *Response) SetHeader(key string, value string) *Response",
-					"Description": "Sets headers for response",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "Key of the header"
-						},
-						{
-							"Name": "value",
-							"Type": "string",
-							"Description": "Value of the header"
-						}
-					],
-					"Returns": {
-						"Type": "string"
-					}
-				},
-				{
-					"Name": "DelHeader",
-					"Line": "func (res *Response) DelHeader(key string) *Response",
-					"Description": "Gets header from response",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "Key of the header"
-						}
-					],
-					"Returns": {
-						"Type": "string"
-					}
-				},
-				{
-					"Name": "http.Header",
-					"Line": "func (res *Response) CloneHeaders() http.Header",
-					"Description": "Clones all header from response",
-					"Returns": {
-						"Type": "http.Header"
-					}
-				},
-				{
-					"Name": "Setlength",
-					"Line": "func (res *Response) Setlength(len string) *Response",
-					"Description": "Sets length of the response body",
-					"Parameters": [
-						{
-							"Name": "len",
-							"Type": "string",
-							"Description": "length value of the header"
-						}
-					],
-					"Returns": {
-						"Type": "*Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) SetBaseHeaders() *Response",
-					"Description": "Sets a good stack of base headers for response",
-					"Returns": {
-						"Type": "*Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) FlushHeaders() *Response",
-					"Description": "Flushes headers to the response body",
-					"Returns": {
-						"Type": "*Response"
-					}
-				},
-				{
-					"Name": "Send",
-					"Line": "func (res *Response) Send(content string) *Response",
-					"Description": "Sends string to the route",
-					"Parameters": [
-						{
-							"Name": "content",
-							"Type": "string",
-							"Description": "The content to write"
-						}
-					],
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "WriteBytes",
-					"Line": "func (res *Response) WriteBytes(bytes []byte) error",
-					"Description": "Writes bytes to the route",
-					"Parameters": [
-						{
-							"Name": "bytes",
-							"Type": "[]bytes",
-							"Description": "The bytes to write"
-						}
-					],
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "Json",
-					"Line": "func (res *Response) Json(content interface}) *Response",
-					"Description": "Writes json content to the route",
-					"Parameters": [
-						{
-							"Name": "content",
-							"Type": "interface",
-							"Description": "{interface{}}  The json struct to write to the page"
-						}
-					],
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "Error",
-					"Line": "func (res *Response) Error(status int, err string) *Response",
-					"Description": "Returns error to the route",
-					"Parameters": [
-						{
-							"Name": "status",
-							"Type": "int",
-							"Description": "The status code of the error"
-						},
-						{
-							"Name": "err",
-							"Type": "string",
-							"Description": "The error to write"
-						}
-					],
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "http.ResponseWriter",
-					"Line": "func (res *Response) Raw() http.ResponseWriter",
-					"Description": "Returns raw http.ResponseWriter instance",
-					"Returns": {
-						"Type": "http.ResponseWriter"
-					}
-				},
-				{
-					"Name": "Render",
-					"Line": "func (res *Response) Render(path string, data interface}) *Response",
-					"Description": "Renders a html page with payload data to the route",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The dir path of the html page"
-						},
-						{
-							"Name": "data",
-							"Type": "interface",
-							"Description": "{interface{}}  The payload data to pass in html page"
-						}
-					],
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "error",
-					"Line": "func (res *Response) CloseConn() error",
-					"Description": "Ends connection to the route page",
-					"Returns": {
-						"Type": "error"
-					}
-				},
-				{
-					"Name": "Redirect",
-					"Line": "func (res *Response) Redirect(url string) *Response",
-					"Description": "Redirects to a different route",
-					"Parameters": [
-						{
-							"Name": "url",
-							"Type": "string",
-							"Description": "The url of the route to redirect"
-						}
-					],
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "Status",
-					"Line": "func (res *Response) Status(status int) *Response",
-					"Description": "Sets response status",
-					"Parameters": [
-						{
-							"Name": "status",
-							"Type": "int",
-							"Description": "The status code for the response"
-						}
-					],
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "SetCookie",
-					"Line": "func (res *Response) SetCookie(cookie *http.Cookie) *Response",
-					"Description": "Set a cookie",
-					"Parameters": [
-						{
-							"Name": "cookie",
-							"Type": "*http.Cookie"
-						}
-					],
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "ClearCookie",
-					"Line": "func (res *Response) ClearCookie(cookie *http.Cookie) *Response",
-					"Description": "Clear a cookie",
-					"Parameters": [
-						{
-							"Name": "cookie",
-							"Type": "*http.Cookie"
-						}
-					],
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) OK() *Response",
-					"Description": "Set status code as 200",
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) MovedPermanently() *Response",
-					"Description": "Set status code as 301",
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) TemporaryRedirect() *Response",
-					"Description": "Set status code as 307",
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) BadRequest() *Response",
-					"Description": "Set status code as 400",
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) Unauthorized() *Response",
-					"Description": "Set status code as 401",
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) Forbidden() *Response",
-					"Description": "Set status code as 403",
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) NotFound() *Response",
-					"Description": "Set status code as 404",
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) InternalServerError() *Response",
-					"Description": "Set status code as 500",
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) BadGateway() *Response",
-					"Description": "Set status code as 502",
-					"Returns": {
-						"Type": "Response"
-					}
-				},
-				{
-					"Name": "*Response",
-					"Line": "func (res *Response) ServiceUnavailaible() *Response",
-					"Description": "Set status code as 503",
-					"Returns": {
-						"Type": "Response"
-					}
-				}
-			],
-			"Properties": [
-				{
-					"Name": "ref",
-					"Type": "http.ResponseWriter",
-					"Description": "The net/http response instance"
-				},
-				{
-					"Name": "url",
-					"Type": "string",
-					"Description": "The route url"
-				},
-				{
-					"Name": "method",
-					"Type": "string",
-					"Description": "The route http method"
-				},
-				{
-					"Name": "header",
-					"Type": "OutgoingHeader",
-					"Description": "The response header instance"
-				},
-				{
-					"Name": "props",
-					"Type": "*map[string]interface",
-					"Description": "{*map[string]interface{}}  The minima instance props"
-				},
-				{
-					"Name": "host",
-					"Type": "string",
-					"Description": "The minima host"
-				},
-				{
-					"Name": "HasEnded",
-					"Type": "bool",
-					"Description": "Whether the response has ended"
-				}
-			]
-		},
-		{
-			"Name": "Handler",
-			"Line": "type Handler func(res *Response, req *Request)",
-			"Description": "The Handler func structure",
-			"Properties": [
-				{
-					"Name": "res",
-					"Type": "Response",
-					"Description": "The response instance"
-				},
-				{
-					"Name": "req",
-					"Type": "Request",
-					"Description": "The request instance"
-				}
-			]
-		},
-		{
 			"Name": "Router",
 			"Line": "type Router struct",
 			"Description": "The router structure",
@@ -1616,6 +1274,37 @@
 					"Returns": {
 						"Type": "*Router"
 					}
+				},
+				{
+					"Name": "use",
+					"Line": "func (r *Router) use(handler ...Handler)",
+					"Description": "Injects Minima middleware to the stack",
+					"Parameters": [
+						{
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler stack to append"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Name": "useRaw",
+					"Line": "func (r *Router) useRaw(handler ...func(http.Handler) http.Handler)",
+					"Description": "Injects net/http middleware to the stack",
+					"Parameters": [
+						{
+							"Name": "handler",
+							"Type": "...func(http.Handler)http.Handler",
+							"Description": "The handler stack to append"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Line": "func (r *Router) buildHandler()",
+					"Description": "Builds whole middleware stack chain into single handler",
+					"Returns": {}
 				}
 			],
 			"Properties": [
@@ -1628,6 +1317,21 @@
 					"Name": "notfound",
 					"Type": "Handler",
 					"Description": "The handler for the non matching routes"
+				},
+				{
+					"Name": "minmiddleware",
+					"Type": "[]Handler",
+					"Description": "The minima handler middleware stack"
+				},
+				{
+					"Name": "middleware",
+					"Type": "[]func(http.Handler)http.Handler",
+					"Description": "The http.Handler middleware stack"
+				},
+				{
+					"Name": "handler",
+					"Type": "http.Handler",
+					"Description": "The single http.Handler built on chaining the whole middleware stack"
 				}
 			]
 		}
