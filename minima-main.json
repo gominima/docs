@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-01 08:55:16.752046772 +0000 UTC m=+0.000068589"
+		"Date": "2022-03-02 06:12:32.051087967 +0000 UTC m=+0.000100001"
 	},
 	"Functions": [
 		{
@@ -32,120 +32,43 @@
 			}
 		},
 		{
-			"Name": "*Config",
-			"Line": "func NewConfig() *Config",
-			"Description": "Make a new default config instance",
-			"Returns": {
-				"Type": "Config"
-			}
+			"Name": "*Minima",
+			"Line": "func New() *Minima",
+			"Returns": {}
 		},
 		{
 			"Name": "*Routes",
 			"Line": "func NewRoutes() *Routes",
-			"Description": "Makes a new Routes instance",
-			"Returns": {
-				"Type": "*Routes"
-			}
+			"Returns": {}
 		},
 		{
 			"Name": "matchRoutes",
 			"Line": "func matchRoutes(path string, routes []Route) (Handler, map[string]string, bool)",
-			"Description": "Matches routes to the request",
-			"Parameters": [
-				{
-					"Name": "path",
-					"Type": "string",
-					"Description": "Path of the request route to find"
-				},
-				{
-					"Name": "routes",
-					"Type": "[]Route",
-					"Description": "The array of routes to match"
-				}
-			],
-			"Returns": {
-				"Description": "{Handler, map[string]string, bool}"
-			}
+			"Returns": {}
 		},
 		{
 			"Name": "cleanArray",
 			"Line": "func cleanArray(a []string) []string",
-			"Description": "Cleans the array and finds non nill values",
-			"Parameters": [
-				{
-					"Name": "path",
-					"Type": "string",
-					"Description": "The array of string to slice and clean"
-				}
-			],
-			"Returns": {
-				"Type": "[]string"
-			}
+			"Returns": {}
 		},
 		{
 			"Name": "request",
 			"Line": "func request(httpRequest *http.Request) *Request",
-			"Description": "Make a new default request instance",
-			"Parameters": [
-				{
-					"Name": "http.Request",
-					"Type": "http.Request",
-					"Description": "The net/http request instance"
-				}
-			],
-			"Returns": {
-				"Type": "Request"
-			}
+			"Returns": {}
 		},
 		{
 			"Name": "NewResHeader",
 			"Line": "func NewResHeader(res http.ResponseWriter, req *http.Request) *OutgoingHeader",
-			"Description": "Make a new default request header instance",
-			"Parameters": [
-				{
-					"Name": "req",
-					"Type": "http.Request",
-					"Description": "The net/http request instance"
-				},
-				{
-					"Name": "res",
-					"Type": "http.ResponseWriter",
-					"Description": "The net/http response instance"
-				}
-			],
-			"Returns": {
-				"Type": "OutgoingHeader"
-			}
+			"Returns": {}
 		},
 		{
 			"Name": "response",
-			"Line": "func response(rw http.ResponseWriter, req *http.Request, props *map[string]interface}) *Response",
-			"Description": "Make a new default response instance",
-			"Parameters": [
-				{
-					"Name": "req",
-					"Type": "http.Request",
-					"Description": "The net/http request instance"
-				},
-				{
-					"Name": "rs",
-					"Type": "http.ResponseWriter",
-					"Description": "The net/http response instance"
-				},
-				{
-					"Name": "props",
-					"Type": "map[string]interface",
-					"Description": "{map[string]interface{}}  The net/http response instance"
-				}
-			],
-			"Returns": {
-				"Type": "Response"
-			}
+			"Line": "func response(rw http.ResponseWriter, req *http.Request) *Response",
+			"Returns": {}
 		},
 		{
 			"Name": "*Router",
 			"Line": "func NewRouter() *Router",
-			"Description": "Make new default router interface",
 			"Returns": {}
 		}
 	],
@@ -193,339 +116,105 @@
 			]
 		},
 		{
-			"Name": "Config",
-			"Line": "type Config struct",
-			"Description": "The config structure",
-			"Properties": [
-				{
-					"Name": "Middleware",
-					"Type": "[]Handler",
-					"Description": "The minima middlewares to be used"
-				},
-				{
-					"Name": "HttpHandler",
-					"Type": "[]http.HandlerFunc",
-					"Description": "The net/http middlewares to be used"
-				},
-				{
-					"Name": "router",
-					"Type": "Router",
-					"Description": "The router instance to be used"
-				}
-			]
-		},
-		{
 			"Name": "Minima",
 			"Line": "type Minima struct",
-			"Description": "The framework structure",
 			"Functions": [
 				{
 					"Name": "Listen",
 					"Line": "func (m *Minima) Listen(addr string) error",
-					"Description": "Starts the actual http server",
-					"Parameters": [
-						{
-							"Name": "addr",
-							"Type": "string",
-							"Description": "The port for the server instance to run on"
-						}
-					],
-					"Returns": {
-						"Type": "error"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "ServeHTTP",
 					"Line": "func (m *Minima) ServeHTTP(w http.ResponseWriter, r *http.Request)",
-					"Description": "Injects the actual Minima server logic to http",
-					"Parameters": [
-						{
-							"Name": "w",
-							"Type": "http.ResponseWriter",
-							"Description": "The net/http response instance"
-						},
-						{
-							"Name": "r",
-							"Type": "http.Request",
-							"Description": "The net/http request instance"
-						}
-					],
 					"Returns": {}
 				},
 				{
 					"Name": "Get",
 					"Line": "func (m *Minima) Get(path string, handler Handler) *Minima",
-					"Description": "Adds route with Get method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Put",
 					"Line": "func (m *Minima) Put(path string, handler Handler) *Minima",
-					"Description": "Adds route with Put method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Options",
 					"Line": "func (m *Minima) Options(path string, handler Handler) *Minima",
-					"Description": "Adds route with Options method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Head",
 					"Line": "func (m *Minima) Head(path string, handler Handler) *Minima",
-					"Description": "Adds route with Head method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Delete",
 					"Line": "func (m *Minima) Delete(path string, handler Handler) *Minima",
-					"Description": "Adds route with Delete method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Patch",
 					"Line": "func (m *Minima) Patch(path string, handler Handler) *Minima",
-					"Description": "Adds route with Patch method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Post",
 					"Line": "func (m *Minima) Post(path string, handler Handler) *Minima",
-					"Description": "Adds route with Post method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "NotFound",
 					"Line": "func (m *Minima) NotFound(handler Handler) *Minima",
-					"Description": "Injects the NotFound handler to the Minima instance",
-					"Parameters": [
-						{
-							"Name": "handler",
-							"Type": "Handler",
-							"Description": "Minima handler instance"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "UseRouter",
 					"Line": "func (m *Minima) UseRouter(router *Router) *Minima",
-					"Description": "Injects the routes from the router to core stack",
-					"Parameters": [
-						{
-							"Name": "router",
-							"Type": "*Router",
-							"Description": "Minima router instance"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Mount",
 					"Line": "func (m *Minima) Mount(path string, router *Router) *Minima",
-					"Description": "Mounts router to a specific path",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "router",
-							"Type": "*Router",
-							"Description": "Minima router instance"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
-				},
-				{
-					"Name": "UseConfig",
-					"Line": "func (m *Minima) UseConfig(config *Config) *Minima",
-					"Description": "Injects middlewares and routers directly to core instance",
-					"Parameters": [
-						{
-							"Name": "config",
-							"Type": "*Config",
-							"Description": "The config instance"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "ShutdownTimeout",
 					"Line": "func (m *Minima) ShutdownTimeout(t time.Duration) *Minima",
-					"Description": "The drain timeout for the core instance",
-					"Parameters": [
-						{
-							"Name": "time",
-							"Type": "time.Duration",
-							"Description": "The time period for drain"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Shutdown",
 					"Line": "func (m *Minima) Shutdown(ctx context.Context) error",
-					"Description": "Shutdowns the core instance",
-					"Parameters": [
-						{
-							"Name": "ctx",
-							"Type": "context.Context",
-							"Description": "The context for shutdown"
-						}
-					],
-					"Returns": {
-						"Type": "error"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "SetProp",
 					"Line": "func (m *Minima) SetProp(key string, value interface}) *Minima",
-					"Description": "Declares prop for core properties",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "Key for the prop"
-						},
-						{
-							"Name": "value",
-							"Type": "interface",
-							"Description": "{interface{}}  Value of the prop"
-						}
-					],
-					"Returns": {
-						"Type": "*Minima"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "GetProp",
 					"Line": "func (m *Minima) GetProp(key string) interface}",
-					"Description": "Gets prop from core properties",
+					"Returns": {}
+				},
+				{
+					"Name": "Use",
+					"Line": "func (m *Minima) Use(handler ...Handler) *Minima",
+					"Description": "Injects Minima middleware to the stack",
 					"Parameters": [
 						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "Key for the prop"
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler stack to append"
 						}
 					],
-					"Returns": {
-						"Type": "interface",
-						"Description": "{interface{}}"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "UseRaw",
-					"Line": "func (m *Minima) UseRaw(handler ...http.HandlerFunc)",
+					"Line": "func (m *Minima) UseRaw(handler ...func(http.Handler) http.Handler) *Minima",
 					"Description": "Injects net/http middleware to the stack",
 					"Parameters": [
 						{
@@ -535,542 +224,308 @@
 						}
 					],
 					"Returns": {}
-				},
-				{
-					"Name": "ServeMiddleware",
-					"Line": "func (m *Minima) ServeMiddleware(res *Response, req *Request)",
-					"Description": "Serves and injects the middlewares to Minima logic",
-					"Parameters": [
-						{
-							"Name": "res",
-							"Type": "Response",
-							"Description": "The Minima response instance"
-						},
-						{
-							"Name": "req",
-							"Type": "Request",
-							"Description": "The Minima req instance"
-						}
-					],
-					"Returns": {}
-				}
-			],
-			"Properties": [
-				{
-					"Name": "server",
-					"Type": "*http.Server",
-					"Description": "The net/http stock server"
-				},
-				{
-					"Name": "started",
-					"Type": "bool",
-					"Description": "Whether the server has started or not"
-				},
-				{
-					"Name": "Timeout",
-					"Type": "*time.Duration",
-					"Description": "The router's breathing time"
-				},
-				{
-					"Name": "router",
-					"Type": "*Router",
-					"Description": "The core router instance running with the server"
-				},
-				{
-					"Name": "minmiddleware",
-					"Type": "[]Handler",
-					"Description": "The standard Minima handler stack"
-				},
-				{
-					"Name": "rawmiddleware",
-					"Type": "[]http.HandlerFunc",
-					"Description": "The raw net/http Minima handler stack"
-				},
-				{
-					"Name": "properties",
-					"Type": "map[string]interface",
-					"Description": "{map[string]interface{}}  The properties for the server instance"
-				},
-				{
-					"Name": "Config",
-					"Type": "*Config",
-					"Description": "The core config file for middlewares and router instances"
-				},
-				{
-					"Name": "drain",
-					"Type": "*time.Duration",
-					"Description": "The router's drain time"
 				}
 			]
 		},
 		{
 			"Name": "param",
-			"Line": "type param struct",
-			"Description": "The Param structure",
-			"Properties": [
-				{
-					"Name": "name",
-					"Type": "string",
-					"Description": "The name of the param"
-				},
-				{
-					"Name": "fixed",
-					"Type": "bool",
-					"Description": "Whether the param is fixed or not"
-				}
-			]
+			"Line": "type param struct"
 		},
 		{
 			"Name": "Route",
-			"Line": "type Route struct",
-			"Description": "The Route structure",
-			"Properties": [
-				{
-					"Name": "prefix",
-					"Type": "string",
-					"Description": "The prefix of the route"
-				},
-				{
-					"Name": "partnames",
-					"Type": "[]param",
-					"Description": "The route paths split into parts"
-				},
-				{
-					"Name": "function",
-					"Type": "Handler",
-					"Description": "The handler to be used"
-				}
-			]
+			"Line": "type Route struct"
 		},
 		{
 			"Name": "Routes",
 			"Line": "type Routes struct",
-			"Description": "The Routes root structure",
 			"Functions": [
 				{
 					"Name": "Add",
-					"Line": "func (r *Routes) Add(p string, f Handler)",
-					"Description": "Adds a new route to the routes table",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "Path of the route"
-						},
-						{
-							"Name": "handler",
-							"Type": "Handler",
-							"Description": "Handler of the route"
-						}
-					],
+					"Line": "func (r *Routes) Add(path string, f Handler)",
 					"Returns": {}
 				},
 				{
 					"Name": "Get",
 					"Line": "func (r *Routes) Get(path string) (Handler, map[string]string, bool)",
-					"Description": "Gets handler and params from the routes table",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "Path of the route to find"
-						}
-					],
-					"Returns": {
-						"Description": "{Handler, map[string]string, bool}"
-					}
-				}
-			],
-			"Properties": [
-				{
-					"Name": "roots",
-					"Type": "map[string][]Route",
-					"Description": "The map of array routes"
-				}
-			]
-		},
-		{
-			"Name": "ReqHeader",
-			"Line": "type ReqHeader struct",
-			"Description": "The request headers structure",
-			"Properties": [
-				{
-					"Name": "key",
-					"Type": "string",
-					"Description": "Key for the header"
-				},
-				{
-					"Name": "value",
-					"Type": "string",
-					"Description": "Value of the header"
+					"Returns": {}
 				}
 			]
 		},
 		{
 			"Name": "IncomingHeader",
 			"Line": "type IncomingHeader struct",
-			"Description": "The Incoming header structure",
 			"Functions": [
 				{
 					"Name": "Get",
 					"Line": "func (h IncomingHeader) Get(key string) string",
-					"Description": "Gets request header from given key",
 					"Returns": {}
 				},
 				{
 					"Name": "Set",
 					"Line": "func (h *IncomingHeader) Set(key string, v string)",
-					"Description": "Declares request header from given key",
 					"Returns": {}
-				}
-			],
-			"Properties": [
-				{
-					"Name": "headers",
-					"Type": "[]*ReqHeader",
-					"Description": "Array of request headers"
 				}
 			]
 		},
 		{
 			"Name": "Request",
 			"Line": "type Request struct",
-			"Description": "The request structure",
 			"Functions": [
 				{
 					"Name": "GetParam",
 					"Line": "func (r *Request) GetParam(key string) string",
-					"Description": "Gets param from route path",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "Key of the route param"
-						}
-					],
-					"Returns": {
-						"Type": "string"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "SetParam",
 					"Line": "func (r *Request) SetParam(key string, value string) *Request",
-					"Description": "Sets param for route path",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "Key of the route param"
-						},
-						{
-							"Name": "value",
-							"Type": "string",
-							"Description": "Value of the route param"
-						}
-					],
-					"Returns": {
-						"Type": "Response"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "string",
 					"Line": "func (r *Request) GetPathURL() string",
-					"Description": "Gets request path url",
-					"Returns": {
-						"Type": "string"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "map[string][]string",
 					"Line": "func (r *Request) Body() map[string][]string",
-					"Description": "Gets raw request body",
-					"Returns": {
-						"Type": "map[string][]string"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "GetBodyValue",
 					"Line": "func (r *Request) GetBodyValue(key string) []string",
-					"Description": "Gets specified request body",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "Key of the request body"
-						}
-					],
-					"Returns": {
-						"Type": "[]string"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "*json.Decoder",
 					"Line": "func (r *Request) Json() *json.Decoder",
-					"Description": "Gets raw json decoder instance",
-					"Returns": {
-						"Type": "json.Decoder"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "string",
 					"Line": "func (r *Request) Method() string",
-					"Description": "Gets method of request",
-					"Returns": {
-						"Type": "string"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "*http.Request",
 					"Line": "func (r *Request) Raw() *http.Request",
-					"Description": "Gets raw net/http request instance",
-					"Returns": {
-						"Type": "http.Request"
-					}
+					"Returns": {}
 				},
 				{
-					"Name": "GetQuery",
-					"Line": "func (r *Request) GetQuery(key string) string",
-					"Description": "Gets request path query",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "key of the request query"
-						}
-					],
-					"Returns": {
-						"Type": "string"
-					}
+					"Name": "GetQueryParam",
+					"Line": "func (r *Request) GetQueryParam(key string) string",
+					"Returns": {}
 				},
 				{
 					"Name": "[]*http.Cookie",
 					"Line": "func (r *Request) Cookies() []*http.Cookie",
-					"Description": "Get all the cookies from the request",
-					"Returns": {
-						"Type": "[]*http.Cookie"
-					}
+					"Returns": {}
 				},
 				{
-					"Name": "Cookie",
-					"Line": "func (r *Request) Cookie(key string) *http.Cookie",
-					"Description": "Get a paticular cookie by its key",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "key of the cookie"
-						}
-					],
-					"Returns": {
-						"Type": "*http.Cookie"
-					}
+					"Name": "GetCookie",
+					"Line": "func (r *Request) GetCookie(key string) *http.Cookie",
+					"Returns": {}
 				},
 				{
 					"Name": "SetHeader",
 					"Line": "func (r *Request) SetHeader(key string, value string) *Request",
-					"Description": "Set a paticular Header",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "key of the Header"
-						},
-						{
-							"Name": "value",
-							"Type": "string",
-							"Description": "value of the Header"
-						}
-					],
-					"Returns": {
-						"Type": "*Request"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "GetHeader",
 					"Line": "func (r *Request) GetHeader(key string) string",
-					"Description": "Get a paticular Header by its key",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "key of the Header"
-						}
-					],
-					"Returns": {
-						"Type": "string"
-					}
-				}
-			],
-			"Properties": [
-				{
-					"Name": "ref",
-					"Type": "*http.Request",
-					"Description": "The net/http request instance"
-				},
-				{
-					"Name": "fileReader",
-					"Type": "multipart.Reader",
-					"Description": "file reader instance"
-				},
-				{
-					"Name": "body",
-					"Type": "map[string][]string",
-					"Description": "Value of the request body"
-				},
-				{
-					"Name": "method",
-					"Type": "string",
-					"Description": "Request method"
-				},
-				{
-					"Name": "Params",
-					"Type": "[]*Params",
-					"Description": "Request path parameters"
-				},
-				{
-					"Name": "url.Values",
-					"Type": "query",
-					"Description": "Request path query params"
-				},
-				{
-					"Name": "header",
-					"Type": "IncomingHeader",
-					"Description": "Incoming headers of the request"
-				},
-				{
-					"Name": "json",
-					"Type": "json.Decoder",
-					"Description": "Json decoder instance"
+					"Returns": {}
 				}
 			]
 		},
 		{
 			"Name": "OutgoingHeader",
 			"Line": "type OutgoingHeader struct",
-			"Description": "The Outgoing header structure",
 			"Functions": [
 				{
 					"Name": "Set",
 					"Line": "func (h *OutgoingHeader) Set(key string, value string) *OutgoingHeader",
-					"Description": "Sets and new header to response",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "Key of the new header"
-						},
-						{
-							"Name": "value",
-							"Type": "string",
-							"Description": "Value of the new header"
-						}
-					],
-					"Returns": {
-						"Type": "OutgoingHeader"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Get",
 					"Line": "func (h *OutgoingHeader) Get(key string) string",
-					"Description": "Gets the header from response headers",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "Key of the header"
-						}
-					],
-					"Returns": {
-						"Type": "string"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Del",
 					"Line": "func (h *OutgoingHeader) Del(key string) *OutgoingHeader",
-					"Description": "Deletes header from respose",
-					"Parameters": [
-						{
-							"Name": "key",
-							"Type": "string",
-							"Description": "Key of the header"
-						}
-					],
-					"Returns": {
-						"Type": "OutgoingHeader"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "http.Header",
 					"Line": "func (h *OutgoingHeader) Clone() http.Header",
-					"Description": "Clones all headers from response",
-					"Returns": {
-						"Type": "OutgoingHeader"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Setlength",
 					"Line": "func (h *OutgoingHeader) Setlength(len string) *OutgoingHeader",
-					"Description": "Sets content lenght",
-					"Parameters": [
-						{
-							"Name": "len",
-							"Type": "string",
-							"Description": "The lenght of the content"
-						}
-					],
-					"Returns": {
-						"Type": "OutgoingHeader"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Status",
 					"Line": "func (h *OutgoingHeader) Status(code int) *OutgoingHeader",
-					"Description": "Sets response status",
-					"Parameters": [
-						{
-							"Name": "code",
-							"Type": "int",
-							"Description": "The status code for the response"
-						}
-					],
-					"Returns": {
-						"Type": "OutgoingHeader"
-					}
+					"Returns": {}
 				},
 				{
 					"Line": "func (h *OutgoingHeader) BaseHeaders()",
-					"Description": "Sends good stack of base headers",
 					"Returns": {}
 				},
 				{
 					"Name": "bool",
 					"Line": "func (h *OutgoingHeader) Flush() bool",
-					"Description": "Flushes and writes header to route",
-					"Returns": {
-						"Type": "bool"
-					}
+					"Returns": {}
 				}
-			],
-			"Properties": [
+			]
+		},
+		{
+			"Name": "Response",
+			"Line": "type Response struct",
+			"Functions": [
 				{
-					"Name": "req",
-					"Type": "http.Request",
-					"Description": "The net/http request instance"
+					"Name": "GetHeader",
+					"Line": "func (res *Response) GetHeader(key string) string",
+					"Returns": {}
 				},
 				{
-					"Name": "res",
-					"Type": "http.ResponseWriter",
-					"Description": "The net/http response instance"
+					"Name": "SetHeader",
+					"Line": "func (res *Response) SetHeader(key string, value string) *Response",
+					"Returns": {}
 				},
 				{
-					"Name": "body",
-					"Type": "bool",
-					"Description": "Whether body has been sent or not"
+					"Name": "DelHeader",
+					"Line": "func (res *Response) DelHeader(key string) *Response",
+					"Returns": {}
 				},
 				{
-					"Name": "status",
-					"Type": "int",
-					"Description": "response status code"
+					"Name": "http.Header",
+					"Line": "func (res *Response) CloneHeaders() http.Header",
+					"Returns": {}
+				},
+				{
+					"Name": "Setlength",
+					"Line": "func (res *Response) Setlength(len string) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) SetBaseHeaders() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) FlushHeaders() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "Send",
+					"Line": "func (res *Response) Send(content string) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "WriteBytes",
+					"Line": "func (res *Response) WriteBytes(bytes []byte) error",
+					"Returns": {}
+				},
+				{
+					"Name": "Json",
+					"Line": "func (res *Response) Json(content interface}) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "Error",
+					"Line": "func (res *Response) Error(status int, err string) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "http.ResponseWriter",
+					"Line": "func (res *Response) Raw() http.ResponseWriter",
+					"Returns": {}
+				},
+				{
+					"Name": "Render",
+					"Line": "func (res *Response) Render(path string, data interface}) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "error",
+					"Line": "func (res *Response) CloseConn() error",
+					"Returns": {}
+				},
+				{
+					"Name": "Redirect",
+					"Line": "func (res *Response) Redirect(url string) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "Status",
+					"Line": "func (res *Response) Status(status int) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "SetCookie",
+					"Line": "func (res *Response) SetCookie(cookie *http.Cookie) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "ClearCookie",
+					"Line": "func (res *Response) ClearCookie(cookie *http.Cookie) *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) OK() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) MovedPermanently() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) TemporaryRedirect() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) BadRequest() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) Unauthorized() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) Forbidden() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) NotFound() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) InternalServerError() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) BadGateway() *Response",
+					"Returns": {}
+				},
+				{
+					"Name": "*Response",
+					"Line": "func (res *Response) ServiceUnavailaible() *Response",
+					"Returns": {}
 				}
 			]
 		},
@@ -1082,198 +537,57 @@
 				{
 					"Name": "Register",
 					"Line": "func (r *Router) Register(method string, path string, handler Handler) error",
-					"Description": "Registers a new route to router interface",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						}
-					],
 					"Returns": {}
 				},
 				{
 					"Name": "Get",
 					"Line": "func (r *Router) Get(path string, handler Handler) *Router",
-					"Description": "Adds route with Get method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Router"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Post",
 					"Line": "func (r *Router) Post(path string, handler Handler) *Router",
-					"Description": "Adds route with Post method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Router"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Put",
 					"Line": "func (r *Router) Put(path string, handler Handler) *Router",
-					"Description": "Adds route with Put method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Router"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Patch",
 					"Line": "func (r *Router) Patch(path string, handler Handler)",
-					"Description": "Adds route with Patch method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Router"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Options",
 					"Line": "func (r *Router) Options(path string, handler Handler) *Router",
-					"Description": "Adds route with Options method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Router"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Head",
 					"Line": "func (r *Router) Head(path string, handler Handler) *Router",
-					"Description": "Adds route with Head method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Router"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Delete",
 					"Line": "func (r *Router) Delete(path string, handler Handler) *Router",
-					"Description": "Adds route with Delete method",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler for the given route"
-						}
-					],
-					"Returns": {
-						"Type": "*Router"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "map[string]*Routes",
 					"Line": "func (r *Router) GetRouterRoutes() map[string]*Routes",
-					"Description": "Returns all the routes in router",
-					"Returns": {
-						"Type": "map[string][]*mux"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "UseRouter",
 					"Line": "func (r *Router) UseRouter(Router *Router) *Router",
-					"Description": "Appends all routes to core router instance",
-					"Parameters": [
-						{
-							"Name": "Router",
-							"Type": "Router",
-							"Description": "The router instance to append"
-						}
-					],
-					"Returns": {
-						"Type": "Router"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "Mount",
 					"Line": "func (r *Router) Mount(path string, Router *Router) *Router",
-					"Description": "Mounts router to a specific path",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "router",
-							"Type": "*Router",
-							"Description": "Minima router instance"
-						}
-					],
-					"Returns": {
-						"Type": "*Router"
-					}
+					"Returns": {}
 				},
 				{
 					"Name": "use",
