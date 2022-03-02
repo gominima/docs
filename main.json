@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-01 15:56:03.634526231 +0000 UTC m=+0.000063101"
+		"Date": "2022-03-02 03:27:20.128159632 +0000 UTC m=+0.000058260"
 	},
 	"Functions": [
 		{
@@ -32,8 +32,8 @@
 			}
 		},
 		{
-			"Name": "*minima",
-			"Line": "func New() *minima",
+			"Name": "*Minima",
+			"Line": "func New() *Minima",
 			"Returns": {}
 		},
 		{
@@ -116,92 +116,92 @@
 			]
 		},
 		{
-			"Name": "minima",
-			"Line": "type minima struct",
+			"Name": "Minima",
+			"Line": "type Minima struct",
 			"Functions": [
 				{
 					"Name": "Listen",
-					"Line": "func (m *minima) Listen(addr string) error",
+					"Line": "func (m *Minima) Listen(addr string) error",
 					"Returns": {}
 				},
 				{
 					"Name": "ServeHTTP",
-					"Line": "func (m *minima) ServeHTTP(w http.ResponseWriter, r *http.Request)",
+					"Line": "func (m *Minima) ServeHTTP(w http.ResponseWriter, r *http.Request)",
 					"Returns": {}
 				},
 				{
 					"Name": "Get",
-					"Line": "func (m *minima) Get(path string, handler Handler) *minima",
+					"Line": "func (m *Minima) Get(path string, handler Handler) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "Put",
-					"Line": "func (m *minima) Put(path string, handler Handler) *minima",
+					"Line": "func (m *Minima) Put(path string, handler Handler) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "Options",
-					"Line": "func (m *minima) Options(path string, handler Handler) *minima",
+					"Line": "func (m *Minima) Options(path string, handler Handler) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "Head",
-					"Line": "func (m *minima) Head(path string, handler Handler) *minima",
+					"Line": "func (m *Minima) Head(path string, handler Handler) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "Delete",
-					"Line": "func (m *minima) Delete(path string, handler Handler) *minima",
+					"Line": "func (m *Minima) Delete(path string, handler Handler) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "Patch",
-					"Line": "func (m *minima) Patch(path string, handler Handler) *minima",
+					"Line": "func (m *Minima) Patch(path string, handler Handler) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "Post",
-					"Line": "func (m *minima) Post(path string, handler Handler) *minima",
+					"Line": "func (m *Minima) Post(path string, handler Handler) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "NotFound",
-					"Line": "func (m *minima) NotFound(handler Handler) *minima",
+					"Line": "func (m *Minima) NotFound(handler Handler) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "UseRouter",
-					"Line": "func (m *minima) UseRouter(router *Router) *minima",
+					"Line": "func (m *Minima) UseRouter(router *Router) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "Mount",
-					"Line": "func (m *minima) Mount(path string, router *Router) *minima",
+					"Line": "func (m *Minima) Mount(path string, router *Router) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "ShutdownTimeout",
-					"Line": "func (m *minima) ShutdownTimeout(t time.Duration) *minima",
+					"Line": "func (m *Minima) ShutdownTimeout(t time.Duration) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "Shutdown",
-					"Line": "func (m *minima) Shutdown(ctx context.Context) error",
+					"Line": "func (m *Minima) Shutdown(ctx context.Context) error",
 					"Returns": {}
 				},
 				{
 					"Name": "SetProp",
-					"Line": "func (m *minima) SetProp(key string, value interface}) *minima",
+					"Line": "func (m *Minima) SetProp(key string, value interface}) *Minima",
 					"Returns": {}
 				},
 				{
 					"Name": "GetProp",
-					"Line": "func (m *minima) GetProp(key string) interface}",
+					"Line": "func (m *Minima) GetProp(key string) interface}",
 					"Returns": {}
 				},
 				{
 					"Name": "Use",
-					"Line": "func (m *minima) Use(handler ...Handler) *minima",
+					"Line": "func (m *Minima) Use(handler ...Handler) *Minima",
 					"Description": "Injects Minima middleware to the stack",
 					"Parameters": [
 						{
@@ -214,7 +214,7 @@
 				},
 				{
 					"Name": "UseRaw",
-					"Line": "func (m *minima) UseRaw(handler ...func(http.Handler) http.Handler) *minima",
+					"Line": "func (m *Minima) UseRaw(handler ...func(http.Handler) http.Handler) *Minima",
 					"Description": "Injects net/http middleware to the stack",
 					"Parameters": [
 						{
