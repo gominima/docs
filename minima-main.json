@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-03 12:41:53.391761538 +0000 UTC m=+0.000102301"
+		"Date": "2022-03-03 14:00:48.479421517 +0000 UTC m=+0.000085702"
 	},
 	"Functions": [
 		{
@@ -482,13 +482,16 @@
 					}
 				},
 				{
-					"Name": "Use",
-					"Line": "func (m *Minima) Use(handler ...Handler) *Minima",
-					"Returns": {}
-				},
-				{
 					"Name": "UseRaw",
 					"Line": "func (m *Minima) UseRaw(handler ...func(http.Handler) http.Handler) *Minima",
+					"Description": "Injects net/http middleware to the stack",
+					"Parameters": [
+						{
+							"Name": "handler",
+							"Type": "...http.HandlerFunc",
+							"Description": "The handler stack to append"
+						}
+					],
 					"Returns": {}
 				}
 			],
@@ -1569,20 +1572,7 @@
 				},
 				{
 					"Name": "use",
-					"Line": "func (r *Router) use(handler ...Handler)",
-					"Description": "Injects Minima middleware to the stack",
-					"Parameters": [
-						{
-							"Name": "handler",
-							"Type": "...Handler",
-							"Description": "The handler stack to append"
-						}
-					],
-					"Returns": {}
-				},
-				{
-					"Name": "useRaw",
-					"Line": "func (r *Router) useRaw(handler ...func(http.Handler) http.Handler)",
+					"Line": "func (r *Router) use(handler ...func(http.Handler) http.Handler)",
 					"Description": "Injects net/http middleware to the stack",
 					"Parameters": [
 						{
