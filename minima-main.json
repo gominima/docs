@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-02 06:12:32.051087967 +0000 UTC m=+0.000100001"
+		"Date": "2022-03-03 03:53:13.699542199 +0000 UTC m=+0.000060003"
 	},
 	"Functions": [
 		{
@@ -314,6 +314,11 @@
 				{
 					"Name": "GetQueryParam",
 					"Line": "func (r *Request) GetQueryParam(key string) string",
+					"Returns": {}
+				},
+				{
+					"Name": "GetRawQuery",
+					"Line": "func (r *Request) GetRawQuery(key string) []string",
 					"Returns": {}
 				},
 				{
