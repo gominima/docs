@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-03 03:53:13.699542199 +0000 UTC m=+0.000060003"
+		"Date": "2022-03-03 08:26:54.096365151 +0000 UTC m=+0.000090902"
 	},
 	"Functions": [
 		{
@@ -529,7 +529,7 @@
 				},
 				{
 					"Name": "*Response",
-					"Line": "func (res *Response) ServiceUnavailaible() *Response",
+					"Line": "func (res *Response) ServiceUnavailable() *Response",
 					"Returns": {}
 				}
 			]
