@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-05 07:06:00.905333127 +0000 UTC m=+0.000101005"
+		"Date": "2022-03-05 07:06:52.338310636 +0000 UTC m=+0.000064883"
 	},
 	"Functions": [
 		{
@@ -630,23 +630,6 @@
 					"Name": "roots",
 					"Type": "map[string][]Route",
 					"Description": "The map of array routes"
-				}
-			]
-		},
-		{
-			"Name": "edge",
-			"Line": "type edge struct",
-			"Description": "The tree edge structure",
-			"Properties": [
-				{
-					"Name": "key",
-					"Type": "string",
-					"Description": "The key of the edge"
-				},
-				{
-					"Name": "n",
-					"Type": "Node",
-					"Description": "The tree node"
 				}
 			]
 		},
