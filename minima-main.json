@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-05 14:15:04.785586242 +0000 UTC m=+0.000072502"
+		"Date": "2022-03-05 19:00:41.133350852 +0000 UTC m=+0.000061015"
 	},
 	"Functions": [
 		{
@@ -84,7 +84,7 @@
 		},
 		{
 			"Name": "request",
-			"Line": "func request(httpRequest *http.Request) *Request",
+			"Line": "func request(r *http.Request) *Request",
 			"Description": "Make a new default request instance",
 			"Parameters": [
 				{
