@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-03 14:00:48.479421517 +0000 UTC m=+0.000085702"
+		"Date": "2022-03-05 07:06:00.905333127 +0000 UTC m=+0.000101005"
 	},
 	"Functions": [
 		{
@@ -142,6 +142,27 @@
 			"Line": "func NewRouter() *Router",
 			"Description": "Make new default router interface",
 			"Returns": {}
+		},
+		{
+			"Name": "*tree",
+			"Line": "func NewTree() *tree",
+			"Description": "Creates a new radix tree",
+			"Returns": {}
+		},
+		{
+			"Name": "ToMap",
+			"Line": "func ToMap(tre *tree) map[string]Handler",
+			"Description": "Turns a radix tree into a hash map",
+			"Parameters": [
+				{
+					"Name": "tre",
+					"Type": "tree",
+					"Description": "The tree to convert"
+				}
+			],
+			"Returns": {
+				"Type": "map[string]Handler"
+			}
 		}
 	],
 	"Structures": [
@@ -396,26 +417,6 @@
 					}
 				},
 				{
-					"Name": "Mount",
-					"Line": "func (m *Minima) Mount(path string, router *Router) *Minima",
-					"Description": "Mounts router to a specific path",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "router",
-							"Type": "*Router",
-							"Description": "Minima router instance"
-						}
-					],
-					"Returns": {
-						"Type": "*minima"
-					}
-				},
-				{
 					"Name": "ShutdownTimeout",
 					"Line": "func (m *Minima) ShutdownTimeout(t time.Duration) *Minima",
 					"Description": "The drain timeout for the core instance",
@@ -489,6 +490,19 @@
 						{
 							"Name": "handler",
 							"Type": "...http.HandlerFunc",
+							"Description": "The handler stack to append"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Name": "Use",
+					"Line": "func (m *Minima) Use(handler Handler) *Minima",
+					"Description": "Injects minima middleware to the stack",
+					"Parameters": [
+						{
+							"Name": "handler",
+							"Type": "Handler",
 							"Description": "The handler stack to append"
 						}
 					],
@@ -616,6 +630,73 @@
 					"Name": "roots",
 					"Type": "map[string][]Route",
 					"Description": "The map of array routes"
+				}
+			]
+		},
+		{
+			"Name": "edge",
+			"Line": "type edge struct",
+			"Description": "The tree edge structure",
+			"Properties": [
+				{
+					"Name": "key",
+					"Type": "string",
+					"Description": "The key of the edge"
+				},
+				{
+					"Name": "n",
+					"Type": "Node",
+					"Description": "The tree node"
+				}
+			]
+		},
+		{
+			"Name": "Node",
+			"Line": "type Node struct",
+			"Description": "The tree Node structure",
+			"Functions": [
+				{
+					"Name": "bool",
+					"Line": "func (n *Node) IsLeaf() bool",
+					"Description": "Whether the node is a leaf or not",
+					"Returns": {
+						"Type": "bool"
+					}
+				},
+				{
+					"Name": "*Node",
+					"Line": "func (n *Node) clone() *Node",
+					"Description": "Clones the current node",
+					"Returns": {
+						"Type": "*Node"
+					}
+				},
+				{
+					"Line": "func (n *Node) incrDepth()",
+					"Description": "Increases node's depth in the tree",
+					"Returns": {}
+				}
+			],
+			"Properties": [
+				{
+					"Name": "handler",
+					"Type": "Handler",
+					"Description": "The handler to be used"
+				},
+				{
+					"Name": "edges",
+					"Type": "[]*edge",
+					"Description": "The array of node edges"
+				},
+				{
+					"Name": "priority",
+					"Type": "int",
+					"Description": "The priority of the node in the tree"
+				},
+				{
+					"Name": "depth",
+					"Type": "int",
+					"Description": "The depth of the node in the tree"
 				}
 			]
 		},
@@ -1528,8 +1609,8 @@
 					}
 				},
 				{
-					"Name": "map[string]*Routes",
-					"Line": "func (r *Router) GetRouterRoutes() map[string]*Routes",
+					"Name": "map[string]*tree",
+					"Line": "func (r *Router) GetRouterRoutes() map[string]*tree",
 					"Description": "Returns all the routes in router",
 					"Returns": {
 						"Type": "map[string][]*mux"
@@ -1537,7 +1618,7 @@
 				},
 				{
 					"Name": "UseRouter",
-					"Line": "func (r *Router) UseRouter(Router *Router) *Router",
+					"Line": "func (r *Router) UseRouter(Router *Router)",
 					"Description": "Appends all routes to core router instance",
 					"Parameters": [
 						{
@@ -1548,26 +1629,6 @@
 					],
 					"Returns": {
 						"Type": "Router"
-					}
-				},
-				{
-					"Name": "Mount",
-					"Line": "func (r *Router) Mount(path string, Router *Router) *Router",
-					"Description": "Mounts router to a specific path",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "The route path"
-						},
-						{
-							"Name": "router",
-							"Type": "*Router",
-							"Description": "Minima router instance"
-						}
-					],
-					"Returns": {
-						"Type": "*Router"
 					}
 				},
 				{
@@ -1592,8 +1653,8 @@
 			"Properties": [
 				{
 					"Name": "routes",
-					"Type": "map[string][]*Routes",
-					"Description": "The mux routes"
+					"Type": "map[string][]*tree",
+					"Description": "The radix-tree based routes"
 				},
 				{
 					"Name": "notfound",
@@ -1614,6 +1675,96 @@
 					"Name": "handler",
 					"Type": "http.Handler",
 					"Description": "The single http.Handler built on chaining the whole middleware stack"
+				}
+			]
+		},
+		{
+			"Name": "tree",
+			"Line": "type tree struct",
+			"Description": "the radix tree structure",
+			"Functions": [
+				{
+					"Name": "InsertNode",
+					"Line": "func (tr *tree) InsertNode(key string, handler Handler)",
+					"Description": "Inserts a new node in the tree",
+					"Parameters": [
+						{
+							"Name": "key",
+							"Type": "string",
+							"Description": "The route path used as key"
+						},
+						{
+							"Name": "handler",
+							"Type": "Handler",
+							"Description": "The handler to be used"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Name": "GetNode",
+					"Line": "func (tr *tree) GetNode(key string) (*Node, map[string]string)",
+					"Description": "Finds a specific node from the tree",
+					"Parameters": [
+						{
+							"Name": "key",
+							"Type": "string",
+							"Description": "The route path used as key"
+						}
+					],
+					"Returns": {
+						"Description": "{*Node, map[string]string}"
+					}
+				},
+				{
+					"Name": "InsertMap",
+					"Line": "func (tr *tree) InsertMap(m map[string]Handler)",
+					"Description": "Inserts a hash map to the tree",
+					"Parameters": [
+						{
+							"Name": "m",
+							"Type": "map[string]Handler",
+							"Description": "The hash map to insert"
+						}
+					],
+					"Returns": {}
+				}
+			],
+			"Properties": [
+				{
+					"Name": "roots",
+					"Type": "Node",
+					"Description": "The roots of the tree"
+				},
+				{
+					"Name": "len",
+					"Type": "int",
+					"Description": "The lenght of the tree"
+				},
+				{
+					"Name": "size",
+					"Type": "int",
+					"Description": "The size of the tree"
+				},
+				{
+					"Name": "safe",
+					"Type": "bool",
+					"Description": "Whether the mutex is enabled or not"
+				},
+				{
+					"Name": "placeholder",
+					"Type": "byte",
+					"Description": "The regex byte for params"
+				},
+				{
+					"Name": "delim",
+					"Type": "byte",
+					"Description": "The regex byte for params"
+				},
+				{
+					"Name": "mu",
+					"Type": "sync.Mutex",
+					"Description": "The synx.Mutex instance"
 				}
 			]
 		}
