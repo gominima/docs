@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-05 07:12:42.923189558 +0000 UTC m=+0.000108401"
+		"Date": "2022-03-05 14:15:04.785586242 +0000 UTC m=+0.000072502"
 	},
 	"Functions": [
 		{
@@ -715,8 +715,8 @@
 			"Description": "The request structure",
 			"Functions": [
 				{
-					"Name": "GetParam",
-					"Line": "func (r *Request) GetParam(key string) string",
+					"Name": "Param",
+					"Line": "func (r *Request) Param(key string) string",
 					"Description": "Gets param from route path",
 					"Parameters": [
 						{
@@ -751,7 +751,7 @@
 				},
 				{
 					"Name": "string",
-					"Line": "func (r *Request) GetPathURL() string",
+					"Line": "func (r *Request) Path() string",
 					"Description": "Gets request path url",
 					"Returns": {
 						"Type": "string"
@@ -766,8 +766,8 @@
 					}
 				},
 				{
-					"Name": "GetBodyValue",
-					"Line": "func (r *Request) GetBodyValue(key string) []string",
+					"Name": "BodyValue",
+					"Line": "func (r *Request) BodyValue(key string) []string",
 					"Description": "Gets specified request body",
 					"Parameters": [
 						{
@@ -805,8 +805,8 @@
 					}
 				},
 				{
-					"Name": "GetQueryParam",
-					"Line": "func (r *Request) GetQueryParam(key string) string",
+					"Name": "Query",
+					"Line": "func (r *Request) Query(key string) string",
 					"Description": "Gets request path query",
 					"Parameters": [
 						{
@@ -820,8 +820,16 @@
 					}
 				},
 				{
-					"Name": "GetRawQuery",
-					"Line": "func (r *Request) GetRawQuery(key string) []string",
+					"Name": "string",
+					"Line": "func (r *Request) QueryString() string",
+					"Description": "Gets request path query in a string",
+					"Returns": {
+						"Type": "string"
+					}
+				},
+				{
+					"Name": "url.Values",
+					"Line": "func (r *Request) QueryParams() url.Values",
 					"Description": "Gets request path query in an array",
 					"Parameters": [
 						{
@@ -832,6 +840,75 @@
 					],
 					"Returns": {
 						"Type": "string"
+					}
+				},
+				{
+					"Name": "string",
+					"Line": "func (r *Request) IP() string",
+					"Description": "Gets ip of the request origin",
+					"Returns": {
+						"Type": "string"
+					}
+				},
+				{
+					"Name": "bool",
+					"Line": "func (r *Request) IsTLS() bool",
+					"Description": "Whether the request is TLS or not",
+					"Returns": {
+						"Type": "bool"
+					}
+				},
+				{
+					"Name": "bool",
+					"Line": "func (r *Request) IsSocket() bool",
+					"Description": "Whether the request is a websocket or not",
+					"Returns": {
+						"Type": "bool"
+					}
+				},
+				{
+					"Name": "string",
+					"Line": "func (r *Request) SchemeType() string",
+					"Description": "Gets the scheme type of the request body",
+					"Returns": {
+						"Type": "bool"
+					}
+				},
+				{
+					"Name": "FormValue",
+					"Line": "func (r *Request) FormValue(key string) string",
+					"Description": "Gets the values from request form",
+					"Parameters": [
+						{
+							"Name": "key",
+							"Type": "string",
+							"Description": "The key of the value"
+						}
+					],
+					"Returns": {
+						"Type": "string"
+					}
+				},
+				{
+					"Line": "func (r *Request) FormParams() (url.Values, error)",
+					"Description": "Gets all the form param values",
+					"Returns": {
+						"Description": "{url.Values, error}"
+					}
+				},
+				{
+					"Name": "FormFile",
+					"Line": "func (r *Request) FormFile(key string) (*multipart.FileHeader, error)",
+					"Description": "Gets a file from request form",
+					"Returns": {
+						"Description": "{multipart.FileHeader, error}"
+					}
+				},
+				{
+					"Line": "func (r *Request) MultipartForm() (*multipart.Form, error)",
+					"Description": "Gets a Multi part form from request form",
+					"Returns": {
+						"Description": "{multipart.Form, error}"
 					}
 				},
 				{
@@ -1191,8 +1268,8 @@
 					}
 				},
 				{
-					"Name": "Json",
-					"Line": "func (res *Response) Json(content interface}) *Response",
+					"Name": "JSON",
+					"Line": "func (res *Response) JSON(content interface}) *Response",
 					"Description": "Writes json content to the route",
 					"Parameters": [
 						{
@@ -1203,6 +1280,61 @@
 					],
 					"Returns": {
 						"Type": "Response"
+					}
+				},
+				{
+					"Name": "XML",
+					"Line": "func (res *Response) XML(content interface}, indent string) error",
+					"Description": "Writes xml content to the route",
+					"Parameters": [
+						{
+							"Name": "content",
+							"Type": "interface",
+							"Description": "{interface{}}  The xml content to write to the page"
+						},
+						{
+							"Name": "indent",
+							"Type": "string",
+							"Description": "The indentation of the content"
+						}
+					],
+					"Returns": {
+						"Type": "error"
+					}
+				},
+				{
+					"Name": "Stream",
+					"Line": "func (res *Response) Stream(contentType string, read io.Reader) error",
+					"Description": "Streams content to the route",
+					"Parameters": [
+						{
+							"Name": "contentType",
+							"Type": "string",
+							"Description": "The content type to stream"
+						},
+						{
+							"Name": "read",
+							"Type": "io.Reader",
+							"Description": "The io.Reader instance"
+						}
+					],
+					"Returns": {
+						"Type": "error"
+					}
+				},
+				{
+					"Name": "NoContent",
+					"Line": "func (res *Response) NoContent(code int) error",
+					"Description": "Sets page's content to none",
+					"Parameters": [
+						{
+							"Name": "code",
+							"Type": "int",
+							"Description": "The status code"
+						}
+					],
+					"Returns": {
+						"Type": "error"
 					}
 				},
 				{
