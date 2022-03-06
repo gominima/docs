@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-05 19:00:41.133350852 +0000 UTC m=+0.000061015"
+		"Date": "2022-03-06 04:18:10.20734531 +0000 UTC m=+0.000054472"
 	},
 	"Functions": [
 		{
@@ -1566,6 +1566,28 @@
 			]
 		},
 		{
+			"Name": "cacheRoute",
+			"Line": "type cacheRoute struct",
+			"Description": "The cache routes struct",
+			"Properties": [
+				{
+					"Name": "method",
+					"Type": "string",
+					"Description": "The route method"
+				},
+				{
+					"Name": "handler",
+					"Type": "Handler",
+					"Description": "The handler for the cached route"
+				},
+				{
+					"Name": "path",
+					"Type": "string",
+					"Description": "The path of the cached route"
+				}
+			]
+		},
+		{
 			"Name": "Router",
 			"Line": "type Router struct",
 			"Description": "The router structure",
@@ -1724,8 +1746,8 @@
 					}
 				},
 				{
-					"Name": "map[string]*tree",
-					"Line": "func (r *Router) GetRouterRoutes() map[string]*tree",
+					"Name": "[]*cacheRoute",
+					"Line": "func (r *Router) GetCacheRoutes() []*cacheRoute",
 					"Description": "Returns all the routes in router",
 					"Returns": {
 						"Type": "map[string][]*mux"
@@ -1785,6 +1807,16 @@
 					"Name": "middleware",
 					"Type": "[]func(http.Handler)http.Handler",
 					"Description": "The http.Handler middleware stack"
+				},
+				{
+					"Name": "isCache",
+					"Type": "bool",
+					"Description": "Whether the router is cache or not"
+				},
+				{
+					"Name": "cacheRoute",
+					"Type": "[]*cacheRoute",
+					"Description": "Slice of cached routes"
 				},
 				{
 					"Name": "handler",
