@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-06 04:25:22.871633131 +0000 UTC m=+0.000081404"
+		"Date": "2022-03-06 06:36:15.771170963 +0000 UTC m=+0.000074502"
 	},
 	"Functions": [
 		{
@@ -32,54 +32,17 @@
 			}
 		},
 		{
+			"Name": "NewGroup",
+			"Line": "func NewGroup(prefix string) *Group",
+			"Description": "Creates a new minima group",
+			"Returns": {}
+		},
+		{
 			"Name": "*Minima",
 			"Line": "func New() *Minima",
 			"Description": "Make a new default minima instance",
 			"Returns": {
 				"Type": "minima"
-			}
-		},
-		{
-			"Name": "*Routes",
-			"Line": "func NewRoutes() *Routes",
-			"Description": "Makes a new Routes instance",
-			"Returns": {
-				"Type": "*Routes"
-			}
-		},
-		{
-			"Name": "matchRoutes",
-			"Line": "func matchRoutes(path string, routes []Route) (Handler, map[string]string, bool)",
-			"Description": "Matches routes to the request",
-			"Parameters": [
-				{
-					"Name": "path",
-					"Type": "string",
-					"Description": "Path of the request route to find"
-				},
-				{
-					"Name": "routes",
-					"Type": "[]Route",
-					"Description": "The array of routes to match"
-				}
-			],
-			"Returns": {
-				"Description": "{Handler, map[string]string, bool}"
-			}
-		},
-		{
-			"Name": "cleanArray",
-			"Line": "func cleanArray(a []string) []string",
-			"Description": "Cleans the array and finds non nill values",
-			"Parameters": [
-				{
-					"Name": "path",
-					"Type": "string",
-					"Description": "The array of string to slice and clean"
-				}
-			],
-			"Returns": {
-				"Type": "[]string"
 			}
 		},
 		{
@@ -205,6 +168,171 @@
 					"Name": "Middlewares",
 					"Type": "Middlewares",
 					"Description": "The middleware stack"
+				}
+			]
+		},
+		{
+			"Name": "Group",
+			"Line": "type Group struct",
+			"Description": "The minima group structure",
+			"Functions": [
+				{
+					"Name": "Get",
+					"Line": "func (g *Group) Get(path string, handler Handler) *Group",
+					"Description": "Adds route with Get method",
+					"Parameters": [
+						{
+							"Name": "path",
+							"Type": "string",
+							"Description": "The route path"
+						},
+						{
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler for the given route"
+						}
+					],
+					"Returns": {
+						"Type": "*Router"
+					}
+				},
+				{
+					"Name": "Post",
+					"Line": "func (g *Group) Post(path string, handler Handler) *Group",
+					"Description": "Adds route with Post method",
+					"Parameters": [
+						{
+							"Name": "path",
+							"Type": "string",
+							"Description": "The route path"
+						},
+						{
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler for the given route"
+						}
+					],
+					"Returns": {
+						"Type": "*Group"
+					}
+				},
+				{
+					"Name": "Put",
+					"Line": "func (g *Group) Put(path string, handler Handler) *Group",
+					"Description": "Adds route with Put method",
+					"Parameters": [
+						{
+							"Name": "path",
+							"Type": "string",
+							"Description": "The route path"
+						},
+						{
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler for the given route"
+						}
+					],
+					"Returns": {
+						"Type": "*Group"
+					}
+				},
+				{
+					"Name": "Patch",
+					"Line": "func (g *Group) Patch(path string, handler Handler)",
+					"Description": "Adds route with Patch method",
+					"Parameters": [
+						{
+							"Name": "path",
+							"Type": "string",
+							"Description": "The route path"
+						},
+						{
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler for the given route"
+						}
+					],
+					"Returns": {
+						"Type": "*Group"
+					}
+				},
+				{
+					"Name": "Options",
+					"Line": "func (g *Group) Options(path string, handler Handler) *Group",
+					"Description": "Adds route with Options method",
+					"Parameters": [
+						{
+							"Name": "path",
+							"Type": "string",
+							"Description": "The route path"
+						},
+						{
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler for the given route"
+						}
+					],
+					"Returns": {
+						"Type": "*Group"
+					}
+				},
+				{
+					"Name": "Head",
+					"Line": "func (g *Group) Head(path string, handler Handler) *Group",
+					"Description": "Adds route with Head method",
+					"Parameters": [
+						{
+							"Name": "path",
+							"Type": "string",
+							"Description": "The route path"
+						},
+						{
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler for the given route"
+						}
+					],
+					"Returns": {
+						"Type": "*Group"
+					}
+				},
+				{
+					"Name": "Delete",
+					"Line": "func (g *Group) Delete(path string, handler Handler) *Group",
+					"Description": "Adds route with Delete method",
+					"Parameters": [
+						{
+							"Name": "path",
+							"Type": "string",
+							"Description": "The route path"
+						},
+						{
+							"Name": "handler",
+							"Type": "...Handler",
+							"Description": "The handler for the given route"
+						}
+					],
+					"Returns": {
+						"Type": "*Group"
+					}
+				},
+				{
+					"Name": "[]*cacheRoute",
+					"Line": "func (g *Group) GetGroupRoutes() []*cacheRoute",
+					"Description": "Returns all routes for the group",
+					"Returns": {}
+				}
+			],
+			"Properties": [
+				{
+					"Name": "route",
+					"Type": "[]cacheroute",
+					"Description": "The array of cached routes"
+				},
+				{
+					"Name": "prefix",
+					"Type": "[string",
+					"Description": "The group prefix"
 				}
 			]
 		},
@@ -507,6 +635,19 @@
 						}
 					],
 					"Returns": {}
+				},
+				{
+					"Name": "UseGroup",
+					"Line": "func (m *Minima) UseGroup(grp *Group) *Minima",
+					"Description": "Injects minima group to main router stack",
+					"Parameters": [
+						{
+							"Name": "grp",
+							"Type": "Group",
+							"Description": "The minima group to append"
+						}
+					],
+					"Returns": {}
 				}
 			],
 			"Properties": [
@@ -544,92 +685,6 @@
 					"Name": "drain",
 					"Type": "*time.Duration",
 					"Description": "The router's drain time"
-				}
-			]
-		},
-		{
-			"Name": "param",
-			"Line": "type param struct",
-			"Description": "The Param structure",
-			"Properties": [
-				{
-					"Name": "name",
-					"Type": "string",
-					"Description": "The name of the param"
-				},
-				{
-					"Name": "fixed",
-					"Type": "bool",
-					"Description": "Whether the param is fixed or not"
-				}
-			]
-		},
-		{
-			"Name": "Route",
-			"Line": "type Route struct",
-			"Description": "The Route structure",
-			"Properties": [
-				{
-					"Name": "prefix",
-					"Type": "string",
-					"Description": "The prefix of the route"
-				},
-				{
-					"Name": "partnames",
-					"Type": "[]param",
-					"Description": "The route paths split into parts"
-				},
-				{
-					"Name": "function",
-					"Type": "Handler",
-					"Description": "The handler to be used"
-				}
-			]
-		},
-		{
-			"Name": "Routes",
-			"Line": "type Routes struct",
-			"Description": "The Routes root structure",
-			"Functions": [
-				{
-					"Name": "Add",
-					"Line": "func (r *Routes) Add(path string, f Handler)",
-					"Description": "Adds a new route to the routes table",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "Path of the route"
-						},
-						{
-							"Name": "handler",
-							"Type": "Handler",
-							"Description": "Handler of the route"
-						}
-					],
-					"Returns": {}
-				},
-				{
-					"Name": "Get",
-					"Line": "func (r *Routes) Get(path string) (Handler, map[string]string, bool)",
-					"Description": "Gets handler and params from the routes table",
-					"Parameters": [
-						{
-							"Name": "path",
-							"Type": "string",
-							"Description": "Path of the route to find"
-						}
-					],
-					"Returns": {
-						"Description": "{Handler, map[string]string, bool}"
-					}
-				}
-			],
-			"Properties": [
-				{
-					"Name": "roots",
-					"Type": "map[string][]Route",
-					"Description": "The map of array routes"
 				}
 			]
 		},
