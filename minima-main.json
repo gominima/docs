@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-07 15:00:10.525915565 +0000 UTC m=+0.000082103"
+		"Date": "2022-03-08 15:55:11.743904949 +0000 UTC m=+0.000084402"
 	},
 	"Functions": [
 		{
@@ -645,6 +645,42 @@
 							"Name": "grp",
 							"Type": "Group",
 							"Description": "The minima group to append"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Name": "File",
+					"Line": "func (m *Minima) File(pth string, dir string)",
+					"Description": "Injects a static file to minima instance",
+					"Parameters": [
+						{
+							"Name": "pth",
+							"Type": "string",
+							"Description": "The route path for static serve"
+						},
+						{
+							"Name": "dir",
+							"Type": "string",
+							"Description": "The dir of the file"
+						}
+					],
+					"Returns": {}
+				},
+				{
+					"Name": "Static",
+					"Line": "func (m *Minima) Static(pth string, dir string)",
+					"Description": "Injects a static directory to minima instance",
+					"Parameters": [
+						{
+							"Name": "pth",
+							"Type": "string",
+							"Description": "The route path for static serve"
+						},
+						{
+							"Name": "dir",
+							"Type": "string",
+							"Description": "The dir of the static folder"
 						}
 					],
 					"Returns": {}
@@ -1444,6 +1480,14 @@
 					"Name": "error",
 					"Line": "func (res *Response) CloseConn() error",
 					"Description": "Ends connection to the route page",
+					"Returns": {
+						"Type": "error"
+					}
+				},
+				{
+					"Name": "File",
+					"Line": "func (res *Response) File(dir string) (error)",
+					"Description": "Sends a file to the server",
 					"Returns": {
 						"Type": "error"
 					}
