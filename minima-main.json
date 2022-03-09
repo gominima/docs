@@ -2,9 +2,45 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-08 15:55:11.743904949 +0000 UTC m=+0.000084402"
+		"Date": "2022-03-09 03:42:29.347493909 +0000 UTC m=+0.000061084"
 	},
 	"Functions": [
+		{
+			"Name": "build",
+			"Line": "func build(h Handler, params map[string]string) func(http.Handler) http.Handler",
+			"Description": "Converts minima handler into middleware chain handler",
+			"Parameters": [
+				{
+					"Name": "h",
+					"Type": "Handler",
+					"Description": "The handler to convert"
+				},
+				{
+					"Name": "params",
+					"Type": "map[string]string",
+					"Description": "The handler params"
+				}
+			],
+			"Returns": {}
+		},
+		{
+			"Name": "buildHandler",
+			"Line": "func buildHandler(h Handler, params map[string]string) http.Handler",
+			"Description": "Converts minima handler into net/http handler func",
+			"Parameters": [
+				{
+					"Name": "h",
+					"Type": "Handler",
+					"Description": "The handler to convert"
+				},
+				{
+					"Name": "params",
+					"Type": "map[string]string",
+					"Description": "The handler params"
+				}
+			],
+			"Returns": {}
+		},
 		{
 			"Name": "Chain",
 			"Line": "func Chain(middlewares ...func(http.Handler) http.Handler) Middlewares",
