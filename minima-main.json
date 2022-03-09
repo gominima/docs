@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-09 03:42:29.347493909 +0000 UTC m=+0.000061084"
+		"Date": "2022-03-09 03:58:40.184196127 +0000 UTC m=+0.000065744"
 	},
 	"Functions": [
 		{
@@ -1313,7 +1313,7 @@
 				{
 					"Name": "DelHeader",
 					"Line": "func (res *Response) DelHeader(key string) *Response",
-					"Description": "Gets header from response",
+					"Description": "Deletes header from response",
 					"Parameters": [
 						{
 							"Name": "key",
@@ -1329,6 +1329,9 @@
 					"Name": "http.Header",
 					"Line": "func (res *Response) CloneHeaders() http.Header",
 					"Description": "Clones all header from response",
+					"Parameters": [
+						{}
+					],
 					"Returns": {
 						"Type": "http.Header"
 					}
