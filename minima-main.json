@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-04-19 03:09:07.309515316 +0000 UTC m=+0.000092903"
+		"Date": "2022-04-19 03:24:18.188234868 +0000 UTC m=+0.000079402"
 	},
 	"Functions": [
 		{
@@ -811,32 +811,6 @@
 			]
 		},
 		{
-			"Name": "IncomingHeader",
-			"Line": "type IncomingHeader struct",
-			"Description": "The Incoming header structure",
-			"Functions": [
-				{
-					"Name": "Get",
-					"Line": "func (h IncomingHeader) Get(key string) string",
-					"Description": "Gets request header from given key",
-					"Returns": {}
-				},
-				{
-					"Name": "Set",
-					"Line": "func (h *IncomingHeader) Set(key string, v string)",
-					"Description": "Declares request header from given key",
-					"Returns": {}
-				}
-			],
-			"Properties": [
-				{
-					"Name": "headers",
-					"Type": "[]*ReqHeader",
-					"Description": "Array of request headers"
-				}
-			]
-		},
-		{
 			"Name": "Request",
 			"Line": "type Request struct",
 			"Description": "The request structure",
@@ -1129,11 +1103,6 @@
 					"Name": "url.Values",
 					"Type": "query",
 					"Description": "Request path query params"
-				},
-				{
-					"Name": "header",
-					"Type": "IncomingHeader",
-					"Description": "Incoming headers of the request"
 				},
 				{
 					"Name": "json",
