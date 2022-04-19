@@ -2,7 +2,7 @@
 	"Meta": {
 		"Generator": "1",
 		"Format": "1",
-		"Date": "2022-03-18 13:13:00.145278371 +0000 UTC m=+0.000096106"
+		"Date": "2022-04-19 03:09:07.309515316 +0000 UTC m=+0.000092903"
 	},
 	"Functions": [
 		{
@@ -773,18 +773,18 @@
 					}
 				},
 				{
+					"Name": "incrDepth",
+					"Line": "func (n *Node) incrDepth()",
+					"Description": "Increases node's depth in the tree",
+					"Returns": {}
+				},
+				{
 					"Name": "clone",
 					"Line": "func (n *Node) clone() *Node",
 					"Description": "Clones the current node",
 					"Returns": {
 						"Type": "*Node"
 					}
-				},
-				{
-					"Name": "incrDepth",
-					"Line": "func (n *Node) incrDepth()",
-					"Description": "Increases node's depth in the tree",
-					"Returns": {}
 				}
 			],
 			"Properties": [
@@ -1528,7 +1528,7 @@
 				},
 				{
 					"Name": "File",
-					"Line": "func (res *Response) File(dir string) (error)",
+					"Line": "func (res *Response) File(dir string) error",
 					"Description": "Sends a file to the server",
 					"Returns": {
 						"Type": "error"
